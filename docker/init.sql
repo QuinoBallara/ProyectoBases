@@ -66,3 +66,52 @@ CREATE TABLE `class_student` (
     FOREIGN KEY (`student_id`) REFERENCES `student`(`id`),
     FOREIGN KEY (`equipment_id`) REFERENCES `equipment`(`id`)
 );
+
+CREATE VIEW activity_revenue AS
+    SELECT 
+        a.id AS activity_id,
+        a.description AS activity_description,
+        (a.cost * COUNT(cs.student_id) + IFNULL(SUM(e.cost), 0)) AS total_revenue
+    FROM 
+        activity a
+    LEFT JOIN 
+        class c ON a.id = c.activity_id
+    LEFT JOIN 
+        class_student cs ON c.id = cs.class_id
+    LEFT JOIN 
+        equipment e ON cs.equipment_id = e.id
+    GROUP BY 
+        a.id
+    ORDER BY 
+        total_revenue DESC;
+
+
+CREATE VIEW student_activity AS
+    SELECT
+        a.id AS activity_id,
+        a.description AS activity_description,
+        COUNT(cs.student_id) AS total_students
+    FROM 
+        activity a
+    JOIN
+        class c ON a.id = c.activity_id
+    JOIN
+        class_student cs ON c.id = cs.class_id
+    GROUP BY
+        a.id
+    ORDER BY
+        total_students DESC;
+
+CREATE VIEW shift_class AS
+    SELECT
+        s.id AS shift_id,
+        s.name AS shift_name,
+        COUNT(c.id) AS total_classes
+    FROM
+        shift s
+    JOIN    
+        class c ON s.id = c.shift_id
+    GROUP BY
+        s.id
+    ORDER BY
+        total_classes DESC;
