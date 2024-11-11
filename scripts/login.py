@@ -21,3 +21,16 @@ def get_logins():
     SELECT * FROM login;
     """
     return run_sql_script(sql_script)["results"]
+
+def get_login_by_mail(mail):
+    sql_script = """
+    SELECT * FROM login WHERE mail = %s;
+    """
+    return run_sql_script(sql_script, (mail,))["results"]
+
+def delete_login(mail):
+    sql_script = """
+    DELETE FROM login WHERE mail = %s;
+    """
+    result = run_sql_script(sql_script, (mail,))
+    return result["alerts"]

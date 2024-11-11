@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector 
 from mysql.connector import Error
 
 def create_connection():
@@ -57,8 +57,16 @@ def run_sql_script(script, params=None):
             connection.close()
 
 
-sql_script = """
-INSERT INTO instructors (first_name, last_name) VALUES ('John', 'Doe');
-"""
+def reset_db():
+    run_sql_script("""
+    delete from class_student;
+    delete from class;
+    delete from equipment;
+    delete from activity;
+    delete from shift;
+    delete from instructor;
+    delete from student;
+    """)
+    print("Database reset.")
 
-run_sql_script(sql_script)
+reset_db()

@@ -12,7 +12,7 @@ class Activity:
 
 def add_activity(activity):
     sql_script = """
-    INSERT INTO activities (description, cost, min_age, max_age)
+    INSERT INTO activity (description, cost, min_age, max_age)
     VALUES (%s, %s, %s, %s);
     """
     result = run_sql_script(sql_script, (activity.description, activity.cost, activity.min_age, activity.max_age))
@@ -20,20 +20,20 @@ def add_activity(activity):
 
 def get_activities():
     sql_script = """
-    SELECT * FROM activities;
+    SELECT * FROM activity;
     """
     return run_sql_script(sql_script)["results"]
 
 def get_activity_by_id(id):
     sql_script = """
-    SELECT * FROM activities
+    SELECT * FROM activity
     WHERE id = %s;
     """
     return run_sql_script(sql_script, (id,))["results"]
 
 def modify_activity(id, activity):
     sql_script = """
-    UPDATE activities
+    UPDATE activity
     SET description = %s, cost = %s, min_age = %s, max_age = %s
     WHERE id = %s;
     """
@@ -42,7 +42,7 @@ def modify_activity(id, activity):
 
 def delete_activity(id):
     sql_script = """
-    DELETE FROM activities WHERE id = %s;
+    DELETE FROM activity WHERE id = %s;
     """
     result = run_sql_script(sql_script, (id,))
     return result["alerts"]
