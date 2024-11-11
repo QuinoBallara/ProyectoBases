@@ -35,8 +35,6 @@ try:
     deleted_shift = get_shift_by_id(2)
     print(deleted_shift)
 
-
-    input("a")
 except Exception as e:
     print(e)
 finally:

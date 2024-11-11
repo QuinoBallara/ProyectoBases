@@ -27,7 +27,7 @@ def get_classes():
 
 def get_class_by_id(class_id):
     sql_script = """
-    SELECT * FROM class WHERE class_id = %s;
+    SELECT * FROM class WHERE id = %s;
     """
     return run_sql_script(sql_script, (class_id,))["results"]
 
@@ -35,14 +35,14 @@ def modify_class(class_id, class_obj):
     sql_script = """
     UPDATE class
     SET dictated = %s, instructor_id = %s, shift_id = %s, activity_id = %s, student_quotas = %s
-    WHERE class_id = %s;
+    WHERE id = %s;
     """
     result = run_sql_script(sql_script, (class_obj.dictated, class_obj.instructor_id, class_obj.shift_id, class_obj.activity_id, class_obj.student_quotas, class_id))
     return result["alerts"]
 
 def delete_class(class_id):
     sql_script = """
-    DELETE FROM class WHERE class_id = %s;
+    DELETE FROM class WHERE id = %s;
     """
     result = run_sql_script(sql_script, (class_id,))
     return result["alerts"]

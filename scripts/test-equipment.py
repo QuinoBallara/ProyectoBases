@@ -37,8 +37,6 @@ try:
     print("Getting all equipment after deletion...")
     equipment = get_all_equipment()
     print(equipment)
-
-    input("a")
 except Exception as e:
     print(e)
 finally:

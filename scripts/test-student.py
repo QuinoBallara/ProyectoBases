@@ -40,8 +40,6 @@ try:
     print("Getting deleted student by ID (assuming ID)...")
     deleted_student = get_student_by_id("12345678")
     print(deleted_student)
-
-    input("a")
 except Exception as e:
     print(e)
 finally:

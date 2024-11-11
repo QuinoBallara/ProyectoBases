@@ -26,8 +26,6 @@ try:
     delete_instructor("12345678")
     instructors = get_instructors()
     print(instructors)
-
-    input("a")
 except Exception as e:
     print(e)
 finally:

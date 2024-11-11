@@ -19,8 +19,6 @@ try:
     print("Getting all logins after deletion...")
     logins = get_logins()
     print(logins)
-
-    input("a")
 except Exception as e:
     print(e)
 finally:
