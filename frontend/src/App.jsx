@@ -2,12 +2,13 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Button, Dropdown, Input } from './components'
 
 function App() {
   const [inputText, setInputText] = useState("")
 
   return (
-    <>
+    <div>
       <Input placeholder="" label={'holaa'} value={inputText} onChange={(value) => { setInputText(value.target.value) }} name='pepito' />
       <Dropdown label="age" options={[
         { value: "1", label: '1' },
@@ -18,7 +19,7 @@ function App() {
       <Button label="hol" onClick={() => { }} />
 
 
-    </>
+    </div>
   )
 }
 

@@ -3,7 +3,7 @@ import { TopBar } from '../../components/TopBar'
 import Dropdown from '../../components/DropdownPolenta'
 import { ClassCard } from '../../components/CassCard'
 
-export const index = () => {
+export const Home = () => {
     return (
         <div>
             <div className='top-bar'>
