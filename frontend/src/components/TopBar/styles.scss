@@ -1,0 +1,16 @@
+.topBar {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #242424;
+    border-bottom: 1px solid #dee2e6;
+
+    .topBarUpperButtonsContainer,
+    .topBarLowerButtonsContainer {
+        display: flex;
+        flex-direction: row;
+
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

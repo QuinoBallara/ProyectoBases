@@ -34,7 +34,6 @@ export const ClassesProvider = ({ children }) => {
         activity: "any",
     });
 
-    // Filter classes based on the current filters state
     useEffect(() => {
         const filteredClasses = allClasses.filter((classItem) => {
             return (
@@ -44,7 +43,7 @@ export const ClassesProvider = ({ children }) => {
             );
         });
         setClasses(filteredClasses);
-    }, [filters, allClasses]); // Trigger filter whenever filters change
+    }, [filters, allClasses]); 
 
     return (
         <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters }}>
