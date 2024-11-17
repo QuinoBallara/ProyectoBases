@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { Button, Dropdown, Input } from './components'
+import { Button} from './components'
 
 function App() {
   const [inputText, setInputText] = useState("")
