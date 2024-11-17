@@ -115,3 +115,22 @@ CREATE VIEW shift_class AS
         s.id
     ORDER BY
         total_classes DESC;
+
+
+CREATE VIEW class_props AS
+    SELECT
+        c.dictated AS dictated,
+        c.student_quotas AS student_quotas,
+        i.first_name AS instructor,
+        s.name AS shift,
+        a.description AS activity
+        FROM
+            class c
+        JOIN
+            instructor i ON c.instructor_id = i.id
+        JOIN
+            shift s ON c.shift_id = s.id
+        JOIN
+            activity a ON c.activity_id = a.id;
+        ORDER BY
+            class_id DESC;
