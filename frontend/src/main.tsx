@@ -8,6 +8,9 @@ import './index.css';
 import Shifts from './pages/Shifts';
 import Students from './pages/Students';
 import Instructors from './pages/Instructors';
+import Revenue from './pages/Revenue';
+import Enrollment from './pages/Enrollment';
+import Attendance from './pages/Attendance';
 
 const App = () => (
   <ClassesProvider>
@@ -18,6 +21,9 @@ const App = () => (
           <Route path="shifts" element={<Shifts />} />
           <Route path="students" element={<Students />} />
           <Route path="instructors" element={<Instructors />} />
+          <Route path="revenues" element={<Revenue />} />
+          <Route path="enrollment" element={<Enrollment />} />
+          <Route path="attendance" element={<Attendance />} />
         </Route>
       </Routes>
     </Router>

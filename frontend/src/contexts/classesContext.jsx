@@ -59,6 +59,24 @@ export const ClassesProvider = ({ children }) => {
         },
     ]);
 
+    const [revenues, setRevenues] = useState([
+        {id: 1, description: 'Yoga', revenue: 7000},
+        {id: 2, description: 'Pilates', revenue: 10000},
+        {id: 3, description: 'Crossfit', revenue: 15000},
+    ]);
+
+    const [enrollment, setEnrollment] = useState([
+        {id: 1, description: 'Yoga', total: 10},
+        {id: 2, description: 'Pilates', total: 15},
+        {id: 3, description: 'Crossfit', total: 20},
+    ]);   
+
+    const [attendance, setAttendance] = useState([
+        {id: 1, shift: 'Morning', total: 10},
+        {id: 2, shift: 'Afternoon', total: 15},
+        {id: 3, shift: 'Night', total: 20},
+    ]);
+
     useEffect(() => {
         const filteredClasses = allClasses.filter((classItem) => {
             return (
@@ -71,7 +89,7 @@ export const ClassesProvider = ({ children }) => {
     }, [filters, allClasses]); 
 
     return (
-        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents }}>
+        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance }}>
             {children}
         </ClassesContext.Provider>
     );

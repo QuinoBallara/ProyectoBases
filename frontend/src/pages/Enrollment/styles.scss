@@ -1,0 +1,37 @@
+.table-container {
+    margin: 20px auto;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.enrollment-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    color: black; 
+}
+
+.enrollment-table th,
+.enrollment-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    color: black; 
+}
+
+.enrollment-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: black; 
+}
+.enrollment-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.enrollment-table tr:hover {
+    background-color: #f1f1f1;
+}

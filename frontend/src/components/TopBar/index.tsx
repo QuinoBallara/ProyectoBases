@@ -27,15 +27,15 @@ export const TopBar = () => {
             <div className="topBarLowerButtonsContainer">
                 <Button
                     label="Revenues"
-                    onClick={() => console.log('Home')}
+                    onClick={() => window.location.href = '/revenues'}
                 />
                 <Button
                     label="Enrollment"
-                    onClick={() => console.log('Home')}
+                    onClick={() => window.location.href = '/enrollment'}
                 />
                 <Button
                     label="Attendance"
-                    onClick={() => console.log('Home')}
+                    onClick={() => window.location.href = '/attendance'}
                 />
             </div>
         </div>
