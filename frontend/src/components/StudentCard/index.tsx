@@ -1,11 +1,11 @@
 import React from 'react'
 
-import {ClassProps} from '../../consts/classProps'
+import {student} from '../../consts/student'
 
 import './styles.scss'
 import Button from '../Button'
 
-export const ClassCard = (props: ClassProps) => {
+export const StudentCard = (props: student) => {
 
   const handleEdit = (): void => {};
 
@@ -16,10 +16,11 @@ export const ClassCard = (props: ClassProps) => {
     <div className='card'>
 
         <div className='cardText'>
-          <h2 className='card-title'>{props.activity}</h2>
-          <p><b>Instructor:</b> {props.instructor}</p>
-          <p><b>Shift:</b> {props.shift}</p>
-          <p><b>Quotas:</b> {props.studentQuotas}</p>
+          <h2 className='card-title'>{props.first_name} {props.last_name} </h2>
+          <p><b>id:</b> {props.id}</p>
+          <p><b>Birthday:</b> {props.birth_day}</p>
+          <p><b>Email:</b> {props.mail}</p>
+          <p><b>Phone:</b> {props.phone}</p>
         </div>
 
 

@@ -17,9 +17,6 @@ export const Home = () => {
 
   return (
     <div className='homePage'>
-      <div className='top-bar'>
-        <TopBar />
-      </div>
       <div className='content'>
         <div className='filters'>
           <Dropdown
@@ -28,7 +25,7 @@ export const Home = () => {
               { value: "any", label: 'Any' },
               { value: "1", label: 'Instructor 1' },
               { value: "2", label: 'Instructor 2' },
-              { value: "3", label: 'Instructor 3' }
+              { value: "3", label: 'Instructor 3' } //está hardcodeado, debería ser dinámico
             ]}
             value={filters.instructor}
             onChange={(e) => handleFilterChange(e, 'instructor')}
@@ -40,7 +37,7 @@ export const Home = () => {
               { value: "any", label: 'Any' },
               { value: "morning", label: 'Morning' },
               { value: "afternoon", label: 'Afternoon' },
-              { value: "night", label: 'Night' }
+              { value: "night", label: 'Night' } //está hardcodeado, debería ser dinámico
             ]}
             value={filters.shift}
             onChange={(e) => handleFilterChange(e, 'shift')}
@@ -52,7 +49,7 @@ export const Home = () => {
               { value: "any", label: 'Any' },
               { value: "yoga", label: 'Yoga' },
               { value: "pilates", label: 'Pilates' },
-              { value: "crossfit", label: 'Crossfit' }
+              { value: "crossfit", label: 'Crossfit' } //está hardcodeado, debería ser dinámico
             ]}
             value={filters.activity}
             onChange={(e) => handleFilterChange(e, 'activity')}

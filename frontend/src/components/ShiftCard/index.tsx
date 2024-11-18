@@ -1,11 +1,11 @@
 import React from 'react'
 
-import {ClassProps} from '../../consts/classProps'
+import {shift} from '../../consts/shift'
 
 import './styles.scss'
 import Button from '../Button'
 
-export const ClassCard = (props: ClassProps) => {
+export const ShiftCard = (props: shift) => {
 
   const handleEdit = (): void => {};
 
@@ -16,10 +16,10 @@ export const ClassCard = (props: ClassProps) => {
     <div className='card'>
 
         <div className='cardText'>
-          <h2 className='card-title'>{props.activity}</h2>
-          <p><b>Instructor:</b> {props.instructor}</p>
-          <p><b>Shift:</b> {props.shift}</p>
-          <p><b>Quotas:</b> {props.studentQuotas}</p>
+          <h2 className='card-title'>{props.name}</h2>
+          <p><b>id:</b> {props.id}</p>
+          <p><b>Start:</b> {props.start_time}</p>
+          <p><b>End:</b> {props.end_time}</p>
         </div>
 
 

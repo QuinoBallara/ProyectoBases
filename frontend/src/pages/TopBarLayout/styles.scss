@@ -1,0 +1,32 @@
+.top-bar-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  
+    &:hover {
+      color: #007bff;
+    }
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f4f4f4;
+  }
+  

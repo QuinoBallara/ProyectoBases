@@ -9,19 +9,19 @@ export const TopBar = () => {
             <div className="topBarUpperButtonsContainer">
                 <Button
                     label="Activities"
-                    onClick={() => console.log('Home')}
+                    onClick={() => window.location.href = '/'}
                 />
                 <Button
                     label="Shifts"
-                    onClick={() => console.log('Home')}
+                    onClick={() => window.location.href = '/shifts'}
                 />
                 <Button
                     label="Students"
-                    onClick={() => console.log('Home')}
+                    onClick={() => window.location.href = '/students'}
                 />
                 <Button
                     label="Instructors"
-                    onClick={() => console.log('Home')}
+                    onClick={() => window.location.href = '/instructors'}
                 />
             </div>
             <div className="topBarLowerButtonsContainer">
