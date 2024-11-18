@@ -19,11 +19,11 @@
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #333;
-    width:80%;
+    width: 80%;
 }
 
 p {
-    width:80%;
+    width: 80%;
     margin: 5px 0;
     color: #666;
 }
@@ -31,12 +31,18 @@ p {
 
 
 .cardButtonsContainer {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
 .cardText {
     width: 80%;
-    display:flex;
+    display: flex;
     flex-direction: column;
+}
+
+.addStudent-box {
+    display: flex;
+    flex-direction: row;
+
 }
