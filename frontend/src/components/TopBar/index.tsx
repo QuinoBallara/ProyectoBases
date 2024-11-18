@@ -2,43 +2,46 @@ import React from 'react'
 import "./styles.scss"
 
 import Button from '../Button'
+import { useNavigate } from 'react-router-dom'
 
 export const TopBar = () => {
+    const navigate = useNavigate()
     return (
         <div className='topBar'>
             <div className="topBarUpperButtonsContainer">
                 <Button
                     label="Activities"
-                    onClick={() => window.location.href = '/'}
+                    onClick={() => navigate('/')}
                 />
                 <Button
                     label="Shifts"
-                    onClick={() => window.location.href = '/shifts'}
+                    onClick={() => navigate('/shifts')}
                 />
                 <Button
                     label="Students"
-                    onClick={() => window.location.href = '/students'}
+                    onClick={() => navigate('/students')}
                 />
                 <Button
                     label="Instructors"
-                    onClick={() => window.location.href = '/instructors'}
+                    onClick={() => navigate('/instructors')}
                 />
             </div>
             <div className="topBarLowerButtonsContainer">
                 <Button
                     label="Revenues"
-                    onClick={() => window.location.href = '/revenues'}
+                    onClick={() => navigate('/revenues')}
                 />
                 <Button
                     label="Enrollment"
-                    onClick={() => window.location.href = '/enrollment'}
+                    onClick={() => navigate('/enrollment')}
                 />
                 <Button
                     label="Attendance"
-                    onClick={() => window.location.href = '/attendance'}
+                    onClick={() => navigate('/attendance')
+                    }
                 />
             </div>
         </div>
-        
+
     )
 }
