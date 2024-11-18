@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { ClassProps } from '../../consts/classProps'
 
@@ -9,7 +9,23 @@ import Dropdown from '../DropdownPolenta'
 export const ClassCard = (props: ClassProps) => {
 
   const [selectedStudent, setSelectedStudent] = useState<string>('None');
-  const [students, setStudents] = useState<string[]>([]);
+  const [students, setStudents] = useState([
+    {
+      id: 1, mail: 'student1@mail.com', first_name: 'Student', last_name: '1', birth_date: '1990-01-01', phone: '123456789',
+    },
+    {
+      id: 2, mail: 'student2@mail.com', first_name: 'Student', last_name: '2', birth_date: '1990-01-01', phone: '123456789',
+    },
+    {
+      id: 3, mail: 'student3@mail.com', first_name: 'Student', last_name: '3', birth_date: '1990-01-01', phone: '123456789',
+    },
+  ]);
+
+  const studentsOptions = useMemo(() => {
+    let list = students.map(student => ({ value: student.id.toString(), label: `${student.first_name} ${student.last_name}` }))
+    list.unshift({ value: "", label: '' });
+    return list;
+  }, [students]);
 
   const addStudent = (): void => { };
 
@@ -31,10 +47,7 @@ export const ClassCard = (props: ClassProps) => {
 
       <div className='cardButtonsContainer'>
         <div className='addStudent-box'>
-          <Dropdown label='Student' value={selectedStudent} onChange={(value) => setSelectedStudent} name='Add Student' options={[
-            { value: "", label: '' },
-
-          ]} />
+          <Dropdown label='Student' value={selectedStudent} onChange={(value) => setSelectedStudent(value.target.value)} name='Add Student' options={studentsOptions} />
           <Button label='Add' onClick={() => addStudent()} />
         </div>
         <Button
