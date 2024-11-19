@@ -44,6 +44,13 @@ const StudentModal: React.FC = () => {
           />
           <div className="modal-content">
             <div className="form-group">
+              <Input  
+                label="ID"
+                type="text"
+                name="id"
+                value={studentModalData.id || ''}
+                onChange={handleChange}
+              />
               <Input
                 label="First Name"
                 type="text"
