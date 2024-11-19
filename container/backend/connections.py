@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import time
+import re
 
 
 def create_connection():
@@ -25,6 +26,19 @@ def create_connection():
     return None
 
 
+def is_safe_sql(sql):
+    """Check if the SQL statement is safe from SQL injection."""
+    # Simple regex to detect common SQL injection patterns
+    sql_injection_patterns = [
+        r"(--|#|\/\*)\s*.*",  # Comments
+        r"(\b(OR|AND)\b\s*1\s*=\s*1)",  # Boolean-based SQL injection
+    ]
+    for pattern in sql_injection_patterns:
+        if re.search(pattern, sql, re.IGNORECASE):
+            return False
+    return True
+
+
 def run_sql_script(script, params=None):
     """Run an SQL script on the connected Docker MySQL database and return results or alerts for errors."""
     connection = create_connection()
@@ -37,6 +51,12 @@ def run_sql_script(script, params=None):
             # Split the script into individual statements
             for statement in script.strip().split(";"):
                 if statement.strip():
+                    if not is_safe_sql(statement):
+                        alerts.append(
+                            f"Potential SQL injection detected in statement: {statement}"
+                        )
+                        continue
+
                     if params:
                         cursor.execute(statement, params)
                     else:
