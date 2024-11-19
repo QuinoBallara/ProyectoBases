@@ -13,6 +13,7 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
+import { ModalProvider } from './contexts/modalContext';
 
 export const App = () => {
     const { isAuthenticated } = useAuth();
@@ -22,6 +23,7 @@ export const App = () => {
 
     return (
         <Router>
+            <ModalProvider>
             <ClassesProvider>
                 <Routes>
                     <Route path="/" element={isAuthenticated ? <TopBarLayout /> : <Navigate to='/login' />}>
@@ -38,6 +40,7 @@ export const App = () => {
                     <Route path="/register" element={<Register />} />
                 </Routes>
             </ClassesProvider>
+            </ModalProvider>
         </Router>
     );
 };

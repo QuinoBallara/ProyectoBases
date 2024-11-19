@@ -4,9 +4,20 @@ import { ClassProps } from '../../consts/classProps'
 
 import './styles.scss'
 import Button from '../Button'
+import { useModal } from '../../contexts/modalContext'
 import Dropdown from '../DropdownPolenta'
 
 export const ClassCard = (props: ClassProps) => {
+
+  const {setIsClassModalUp, setClassModalData, classModalData} = useModal();
+
+  const handleEdit = (): void => {
+
+    setClassModalData(props);
+    setIsClassModalUp(true);
+
+  };
+
 
   const [selectedStudent, setSelectedStudent] = useState<string>('None');
   const [students, setStudents] = useState([
@@ -29,7 +40,6 @@ export const ClassCard = (props: ClassProps) => {
 
   const addStudent = (): void => { };
 
-  const handleEdit = (): void => { };
 
   const handleDelete = (): void => { };
 

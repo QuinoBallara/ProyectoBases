@@ -34,6 +34,12 @@ export const ClassesProvider = ({ children }) => {
         activity: "any",
     });
 
+    const [activities, setActivities] = useState([
+        {id: 1, description: 'Yoga', cost: 100, min_age: 18, max_age: 60},
+        {id: 2, description: 'Pilates', cost: 150, min_age: 18, max_age: 60},
+        {id: 3, description: 'Crossfit', cost: 200, min_age: 18, max_age: 60},
+    ]);
+
 
     const [instructors, setInstructors] = useState([
         {id: 1, first_name: 'Instructor', last_name: '1'},
@@ -89,7 +95,7 @@ export const ClassesProvider = ({ children }) => {
     }, [filters, allClasses]); 
 
     return (
-        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance }}>
+        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities }}>
             {children}
         </ClassesContext.Provider>
     );
