@@ -3,6 +3,7 @@ import { student } from '../../consts/student'
 import Dropdown from '../DropdownPolenta'
 import './styles.scss'
 import Button from '../Button'
+import { useModal } from '../../contexts/modalContext'
 
 export const StudentCard = (props: student) => {
   const [selectedActivity, setSelectedActivity] = useState<string>('None');
@@ -32,11 +33,11 @@ export const StudentCard = (props: student) => {
 
   }
 
-  const handleEdit = (): void => { };
-
   const handleDelete = (): void => { };
 
+  const { setStudentModalData, setIsStudentModalUp } = useModal();
 
+  const handleEdit = (): void => { setStudentModalData(props); setIsStudentModalUp(true); };
 
 
   return (
@@ -67,7 +68,6 @@ export const StudentCard = (props: student) => {
           onClick={() => handleDelete()}
         />
       </div>
-
 
     </div>
   )
