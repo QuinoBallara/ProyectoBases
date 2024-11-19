@@ -14,6 +14,7 @@ import { Register } from './pages/Register';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
 import { ModalProvider } from './contexts/modalContext';
+import { Activities } from './pages/Activities';
 
 export const App = () => {
     const { isAuthenticated } = useAuth();
@@ -24,22 +25,23 @@ export const App = () => {
     return (
         <Router>
             <ModalProvider>
-            <ClassesProvider>
-                <Routes>
-                    <Route path="/" element={isAuthenticated ? <TopBarLayout /> : <Navigate to='/login' />}>
-                        <Route index element={<Home />} />
-                        <Route path="home" element={<Home />} />
-                        <Route path="shifts" element={<Shifts />} />
-                        <Route path="students" element={<Students />} />
-                        <Route path="instructors" element={<Instructors />} />
-                        <Route path="revenues" element={<Revenue />} />
-                        <Route path="enrollment" element={<Enrollment />} />
-                        <Route path="attendance" element={<Attendance />} />
-                    </Route>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                </Routes>
-            </ClassesProvider>
+                <ClassesProvider>
+                    <Routes>
+                        <Route path="/" element={isAuthenticated ? <TopBarLayout /> : <Navigate to='/login' />}>
+                            <Route index element={<Home />} />
+                            <Route path="home" element={<Home />} />
+                            <Route path="shifts" element={<Shifts />} />
+                            <Route path="students" element={<Students />} />
+                            <Route path="instructors" element={<Instructors />} />
+                            <Route path="revenues" element={<Revenue />} />
+                            <Route path="enrollment" element={<Enrollment />} />
+                            <Route path="attendance" element={<Attendance />} />
+                            <Route path="activities" element={<Activities />} />
+                        </Route>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                    </Routes>
+                </ClassesProvider>
             </ModalProvider>
         </Router>
     );

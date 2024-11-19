@@ -10,8 +10,12 @@ export const TopBar = () => {
         <div className='topBar'>
             <div className="topBarUpperButtonsContainer">
                 <Button
-                    label="Activities"
+                    label="Classes"
                     onClick={() => navigate('/')}
+                />
+                <Button
+                    label="Activities"
+                    onClick={() => navigate('/activities')}
                 />
                 <Button
                     label="Shifts"
