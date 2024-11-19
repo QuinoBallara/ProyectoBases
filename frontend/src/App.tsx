@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import React from 'react';
 import { ModalProvider } from './contexts/modalContext';
 import { Activities } from './pages/Activities';
+import { Equipment } from './pages/Equipment';
 
 export const App = () => {
     const { isAuthenticated } = useAuth();
@@ -33,6 +34,7 @@ export const App = () => {
                             <Route path="shifts" element={<Shifts />} />
                             <Route path="students" element={<Students />} />
                             <Route path="instructors" element={<Instructors />} />
+                            <Route path="equipment" element={<Equipment />} />
                             <Route path="revenues" element={<Revenue />} />
                             <Route path="enrollment" element={<Enrollment />} />
                             <Route path="attendance" element={<Attendance />} />
