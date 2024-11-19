@@ -4,10 +4,16 @@ import {shift} from '../../consts/shift'
 
 import './styles.scss'
 import Button from '../Button'
+import { useModal } from '../../contexts/modalContext'
 
 export const ShiftCard = (props: shift) => {
 
-  const handleEdit = (): void => {};
+  const {setIsShiftModalUp, setShiftModalData} = useModal();
+
+  const handleEdit = (): void => {
+    setIsShiftModalUp(true);
+    setShiftModalData(props);
+  };
 
   const handleDelete = (): void => {};
 
