@@ -1,7 +1,7 @@
 export type ClassProps = {
-    dictated: boolean,
-    instructor: string,
-    shift: string,
-    activity: string,
-    studentQuotas: number
-  }
+  dictated: boolean,
+  instructor: string,
+  shift: string,
+  activity: string,
+  studentQuotas: number
+}
