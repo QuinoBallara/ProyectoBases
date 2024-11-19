@@ -9,6 +9,7 @@ export const ModalProvider = ({ children }) => {
     const [isShiftModalUp, setIsShiftModalUp] = useState(false);
     const [isStudentModalUp, setIsStudentModalUp] = useState(false);
     const [isActivityModalUp, setIsActivityModalUp] = useState(false);
+    const [isEquipmentModalUp, setIsEquipmentModalUp] = useState(false);
 
     const [classModalData, setClassModalData] = useState({
         instructor: 'any',
@@ -45,6 +46,12 @@ export const ModalProvider = ({ children }) => {
         max_age: '',
     });
 
+    const [equipmentModalData, setEquipmentModalData] = useState({
+        activity: '',
+        description: '',
+        cost: '',
+    });
+
     const setIsClassModalUp = (condition) => {
         setTimeout(() => {
             setIsClassModalUp_(condition);
@@ -59,6 +66,7 @@ export const ModalProvider = ({ children }) => {
             isShiftModalUp, setIsShiftModalUp, shiftModalData, setShiftModalData,
             isStudentModalUp, setIsStudentModalUp, studentModalData, setStudentModalData,
             isActivityModalUp, setIsActivityModalUp, activityModalData, setActivityModalData,
+            isEquipmentModalUp, setIsEquipmentModalUp, equipmentModalData, setEquipmentModalData
         }}>
             {children}
         </ModalContext.Provider>

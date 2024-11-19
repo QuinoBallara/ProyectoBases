@@ -29,6 +29,10 @@ export const TopBar = () => {
                     label="Instructors"
                     onClick={() => navigate('/instructors')}
                 />
+                <Button
+                    label="Equipment"
+                    onClick={() => navigate('/equipment')}
+                />
             </div>
             <div className="topBarLowerButtonsContainer">
                 <Button

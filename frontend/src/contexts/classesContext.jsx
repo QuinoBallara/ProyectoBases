@@ -33,24 +33,23 @@ export const ClassesProvider = ({ children }) => {
         shift: "any",
         activity: "any",
     });
-
     const [activities, setActivities] = useState([
-        {id: 1, description: 'Yoga', cost: 100, min_age: 18, max_age: 60},
-        {id: 2, description: 'Pilates', cost: 150, min_age: 18, max_age: 60},
-        {id: 3, description: 'Crossfit', cost: 200, min_age: 18, max_age: 60},
+        { id: 1, description: 'Yoga', cost: 100, min_age: 18, max_age: 60 },
+        { id: 2, description: 'Pilates', cost: 150, min_age: 18, max_age: 60 },
+        { id: 3, description: 'Crossfit', cost: 200, min_age: 18, max_age: 60 },
     ]);
 
 
     const [instructors, setInstructors] = useState([
-        {id: 1, first_name: 'Instructor', last_name: '1'},
-        {id: 2, first_name: 'Instructor', last_name: '2'},
-        {id: 3, first_name: 'Instructor', last_name: '3'},
+        { id: 1, first_name: 'Instructor', last_name: '1' },
+        { id: 2, first_name: 'Instructor', last_name: '2' },
+        { id: 3, first_name: 'Instructor', last_name: '3' },
     ]);
 
     const [shifts, setShifts] = useState([
-        {id: 1, name: 'Morning', start_time: '08:00', end_time: '12:00'},
-        {id: 2, name: 'Afternoon', start_time: '12:00', end_time: '16:00'},
-        {id: 3, name: 'Night', start_time: '16:00', end_time: '20:00'},
+        { id: 1, name: 'Morning', start_time: '08:00', end_time: '12:00' },
+        { id: 2, name: 'Afternoon', start_time: '12:00', end_time: '16:00' },
+        { id: 3, name: 'Night', start_time: '16:00', end_time: '20:00' },
     ]);
 
     const [students, setStudents] = useState([
@@ -65,22 +64,34 @@ export const ClassesProvider = ({ children }) => {
         },
     ]);
 
+    const [equipments, setEquipments] = useState([
+        {
+            id: 1, description: 'Yoga mat', cost: 50, activity: 'Yoga',
+        },
+        {
+            id: 2, description: 'Pilates ball', cost: 100, activity: 'Pilates',
+        },
+        {
+            id: 3, description: 'Crossfit rope', cost: 150, activity: 'Crossfit',
+        }
+    ]);
+
     const [revenues, setRevenues] = useState([
-        {id: 1, description: 'Yoga', revenue: 7000},
-        {id: 2, description: 'Pilates', revenue: 10000},
-        {id: 3, description: 'Crossfit', revenue: 15000},
+        { id: 1, description: 'Yoga', revenue: 7000 },
+        { id: 2, description: 'Pilates', revenue: 10000 },
+        { id: 3, description: 'Crossfit', revenue: 15000 },
     ]);
 
     const [enrollment, setEnrollment] = useState([
-        {id: 1, description: 'Yoga', total: 10},
-        {id: 2, description: 'Pilates', total: 15},
-        {id: 3, description: 'Crossfit', total: 20},
-    ]);   
+        { id: 1, description: 'Yoga', total: 10 },
+        { id: 2, description: 'Pilates', total: 15 },
+        { id: 3, description: 'Crossfit', total: 20 },
+    ]);
 
     const [attendance, setAttendance] = useState([
-        {id: 1, shift: 'Morning', total: 10},
-        {id: 2, shift: 'Afternoon', total: 15},
-        {id: 3, shift: 'Night', total: 20},
+        { id: 1, shift: 'Morning', total: 10 },
+        { id: 2, shift: 'Afternoon', total: 15 },
+        { id: 3, shift: 'Night', total: 20 },
     ]);
 
     useEffect(() => {
@@ -92,10 +103,10 @@ export const ClassesProvider = ({ children }) => {
             );
         });
         setClasses(filteredClasses);
-    }, [filters, allClasses]); 
+    }, [filters, allClasses]);
 
     return (
-        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities }}>
+        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments }}>
             {children}
         </ClassesContext.Provider>
     );

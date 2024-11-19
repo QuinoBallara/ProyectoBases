@@ -6,19 +6,16 @@ import Button from '../../components/Button'
 import Input from '../../components/Input'
 
 export const Register = () => {
-    const { register, isAuthenticated } = useAuth()
+    const { register, setIsAuthenticated } = useAuth()
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const navigate = useNavigate()
 
     const handleRegister = async () => {
-        const result = await register(email, password)
+        setIsAuthenticated(true);
+        navigate('/');
+    };
 
-        if (result) {
-            console.log('Registered successfully')
-            navigate('/home')
-        }
-    }
     return (
         <div className='register-card'>
             <div className='register-header'>
