@@ -1,29 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './styles.scss';
 import Button from '../../components/Button';
 import Dropdown from '../../components/DropdownPolenta';
 import Input4Number from '../../components/Input4Number';
 import { useModal } from '../../contexts/modalContext';
+import { useClasses } from '../../contexts/classesContext';
 
 const ClassModal: React.FC = () => {
-  const [formState, setFormState] = useModal();
+  const {
+    isClassModalUp,
+    setIsClassModalUp,
+    classModalData,
+    setClassModalData,
+  } = useModal();
 
-  const [isClassModalUp, setIsClassModalUp] = useModal(); 
+  const {instructors, shifts, activities} = useClasses();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormState((prevForm) => ({
-      ...prevForm,
-      [name]: value,
+    setClassModalData((prevData) => ({
+      ...prevData,
+      [name]: name === 'quotas' ? Number(value) : value,
     }));
   };
+
+  useEffect(() => {
+    console.log(classModalData.instructor);
+  }, [classModalData]);
 
   const closeModal = () => setIsClassModalUp(false);
 
   const handleSubmit = () => {
-    console.log('Submitted form:', formState);
+    console.log('Submitted form:', classModalData);
     closeModal();
   };
 
@@ -39,43 +49,35 @@ const ClassModal: React.FC = () => {
           <div className="modal-content">
             <Dropdown
               label="Instructor"
-              options={[
-                { value: 'any', label: 'Any' },
-                { value: '1', label: 'Instructor 1' },
-                { value: '2', label: 'Instructor 2' },
-                { value: '3', label: 'Instructor 3' },
-              ]}
-              value={formState.instructor}
+              options={instructors.map((instructor: { first_name: string; last_name: string }) => {
+                const fullName = `${instructor.first_name} ${instructor.last_name}`;
+                return { value: fullName, label: fullName };
+              })}
+              value={classModalData.instructor}
               onChange={handleChange}
               name="instructor"
             />
             <Dropdown
               label="Shift"
-              options={[
-                { value: 'any', label: 'Any' },
-                { value: 'morning', label: 'Morning' },
-                { value: 'afternoon', label: 'Afternoon' },
-                { value: 'night', label: 'Night' },
-              ]}
-              value={formState.shift}
+              options={shifts.map((shift: { name: string}) => {
+                return { value: shift.name, label: shift.name };
+              })}
+              value={classModalData.shift}
               onChange={handleChange}
               name="shift"
             />
             <Dropdown
               label="Activity"
-              options={[
-                { value: 'any', label: 'Any' },
-                { value: 'yoga', label: 'Yoga' },
-                { value: 'pilates', label: 'Pilates' },
-                { value: 'crossfit', label: 'Crossfit' },
-              ]}
-              value={formState.activity}
+              options={activities.map((activity: { description: string}) => {
+                return { value: activity.description, label: activity.description };
+              })}
+              value={classModalData.activity}
               onChange={handleChange}
               name="activity"
             />
             <Input4Number
               label="Quotas"
-              value={formState.quotas}
+              value={classModalData.quotas}
               onChange={handleChange}
               name="quotas"
             />

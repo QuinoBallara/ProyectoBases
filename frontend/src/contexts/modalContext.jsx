@@ -4,7 +4,7 @@ const ModalContext = createContext();
 
 export const ModalProvider = ({ children }) => {
 
-    const [isClassModalUp, setIsClassModalUp] = useState(false);
+    const [isClassModalUp, setIsClassModalUp_] = useState(false);
     const [isInstructorModalUp, setIsInstructorModalUp] = useState(false);
     const [isShiftModalUp, setIsShiftModalUp] = useState(false);
     const [isStudentModalUp, setIsStudentModalUp] = useState(false);
@@ -33,7 +33,14 @@ export const ModalProvider = ({ children }) => {
         last_name: '',
         birth_date: '',
         phone: '',
-    })
+    });
+
+    const setIsClassModalUp = (condition) => {
+        setTimeout(() => {
+            setIsClassModalUp_(condition); 
+        }, 0);
+
+    }
 
     return (
         <ModalContext.Provider value={{

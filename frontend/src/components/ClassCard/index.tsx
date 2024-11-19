@@ -4,10 +4,18 @@ import {ClassProps} from '../../consts/classProps'
 
 import './styles.scss'
 import Button from '../Button'
+import { useModal } from '../../contexts/modalContext'
 
 export const ClassCard = (props: ClassProps) => {
 
-  const handleEdit = (): void => {};
+  const {setIsClassModalUp, setClassModalData, classModalData} = useModal();
+
+  const handleEdit = (): void => {
+
+    setClassModalData(props);
+    setIsClassModalUp(true);
+
+  };
 
   const handleDelete = (): void => {};
 
