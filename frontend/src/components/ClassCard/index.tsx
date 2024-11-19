@@ -5,6 +5,7 @@ import { ClassProps } from '../../consts/classProps'
 import './styles.scss'
 import Button from '../Button'
 import { useModal } from '../../contexts/modalContext'
+import Dropdown from '../DropdownPolenta'
 
 export const ClassCard = (props: ClassProps) => {
 
@@ -39,7 +40,6 @@ export const ClassCard = (props: ClassProps) => {
 
   const addStudent = (): void => { };
 
-  const handleEdit = (): void => { };
 
   const handleDelete = (): void => { };
 
