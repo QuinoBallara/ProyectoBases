@@ -7,60 +7,69 @@ import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
 import Input from '../../components/Input';
 
-const InstructorModal: React.FC = () => {
+const ShiftModal: React.FC = () => {
   const {
-    isInstructorModalUp,
-    setIsInstructorModalUp,
-    instructorModalData,
-    setInstructorModalData,
+    isShiftModalUp,
+    setIsShiftModalUp,
+    shiftModalData,
+    setShiftModalData,
   } = useModal();
-
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setInstructorModalData((prevData) => ({
+    setShiftModalData((prevData) => ({
       ...prevData,
+      [name]: value,  
     }));
   };
 
   useEffect(() => {
-  }, [instructorModalData]);
+  }, [shiftModalData]);
 
-  const closeModal = () => setIsInstructorModalUp(false);
+  const closeModal = () => setIsShiftModalUp(false);
 
   const handleSubmit = () => {
     closeModal();
   };
 
   return (
-    isInstructorModalUp && (
-      <div className="instructorModalContainer">
-        <div className="instructorModal">
+    isShiftModalUp && (
+      <div className="shiftModalContainer">
+        <div className="shiftModal">
           <Button
-            className="close-button-instructorModal"
+            className="close-button-shiftModal"
             label="Close"
             onClick={closeModal}
           />
           <div className="modal-content">
             <Input
-              label="First Name"
+              label="Name"
               type="text"
-              name="first_name"
-              value={instructorModalData.first_name || ''}
+              name="name"
+              value={shiftModalData.name || ''}
               onChange={handleChange}
             />
+            <label htmlFor="start_time">Start Time</label>
             <Input
-              label="Last Name"
-              type="text"
-              name="last_name"
-              value={instructorModalData.last_name || ''}
+              label=""
+              type="time"
+              name="start_time"
+              value={shiftModalData.start_time || ''}
+              onChange={handleChange}
+            />
+            <label htmlFor="end_time">End Time</label>
+            <Input
+              label=""
+              type="time"
+              name="end_time"
+              value={shiftModalData.end_time || ''}
               onChange={handleChange}
             />
           </div>
           <Button
-            className="submit-button-instructorModal"
+            className="submit-button-shiftModal"
             label="Submit"
             onClick={handleSubmit}
           />
@@ -70,4 +79,4 @@ const InstructorModal: React.FC = () => {
   );
 };
 
-export default InstructorModal;
+export default ShiftModal;
