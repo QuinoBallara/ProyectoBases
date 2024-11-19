@@ -22,6 +22,7 @@ const InstructorModal: React.FC = () => {
     const { name, value } = e.target;
     setInstructorModalData((prevData) => ({
       ...prevData,
+      [name]: value, 
     }));
   };
 
@@ -44,6 +45,13 @@ const InstructorModal: React.FC = () => {
             onClick={closeModal}
           />
           <div className="modal-content">
+            <Input  
+              label="ID"
+              type="text"
+              name="id"
+              value={instructorModalData.id || ''}
+              onChange={handleChange}
+            />
             <Input
               label="First Name"
               type="text"

@@ -18,6 +18,7 @@ export const ModalProvider = ({ children }) => {
     })
 
     const [instructorModalData, setInstructorModalData] = useState({
+        id: '',
         first_name: '',
         last_name: '',
     })
@@ -29,6 +30,7 @@ export const ModalProvider = ({ children }) => {
     })
 
     const [studentModalData, setStudentModalData] = useState({
+        id: '',
         mail: '',
         first_name: '',
         last_name: '',
