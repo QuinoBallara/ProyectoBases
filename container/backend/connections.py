@@ -85,4 +85,4 @@ def reset_db():
     print("Database reset.")
 
 
-reset_db()
+# reset_db()
