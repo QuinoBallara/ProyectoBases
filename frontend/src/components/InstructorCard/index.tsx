@@ -4,10 +4,16 @@ import {instructor} from '../../consts/instructor'
 
 import './styles.scss'
 import Button from '../Button'
+import { useModal } from '../../contexts/modalContext'
 
 export const InstructorCard = (props: instructor) => {
 
-  const handleEdit = (): void => {};
+  const {setIsInstructorModalUp, setInstructorModalData} = useModal();
+
+  const handleEdit = (): void => {
+    setInstructorModalData(props);
+    setIsInstructorModalUp(true);
+  };
 
   const handleDelete = (): void => {};
 
