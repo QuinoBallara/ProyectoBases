@@ -11,13 +11,14 @@
 
 1. Make sure you have Docker Running.
 2. Open a terminal on the root folder of the project and run the following commands:
+
     ```bash
     cd container
     docker-compose up
     ```
 3. That's it! The backend is running on `localhost:5001`
 
-To test if it's working, you can either make an API call on postman or run the following commands on your terminal:
+To test if it's working, you can either make an API call on postman at `http://localhost:5001/` or run the following commands on your terminal:
 1. `docker exec -it mysql_db mysql -u root -p`
 2. Enter the password `root`
 3. `use mydb;`
@@ -27,6 +28,7 @@ To test if it's working, you can either make an API call on postman or run the f
 ### Frontend
 
 1. Open a terminal on the root folder of the project and run the following commands:
+
     ```bash
     cd frontend
     npm install
