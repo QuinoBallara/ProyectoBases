@@ -2,9 +2,11 @@ import React, { useState, useMemo } from 'react'
 import { activityType } from '../../consts/activity'
 import Button from '../../components/Button'
 import "./styles.scss"
+import { useModal } from '../../contexts/modalContext'
 
 export const ActivityCard = (props: activityType) => {
 
+    const { setActivityModalData, setIsActivityModalUp } = useModal();
 
     const addActivity = () => {
         console.log('Activity added')
@@ -15,7 +17,8 @@ export const ActivityCard = (props: activityType) => {
     }
 
     const handleEdit = () => {
-        console.log('Activity edited')
+        setActivityModalData(props)
+        setIsActivityModalUp(true);
     }
 
     return (
