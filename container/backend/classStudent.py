@@ -138,3 +138,11 @@ def delete_class_student_by_student_id(student_id):
     """
     result = run_sql_script(sql_script, (student_id,))
     return result["alerts"]
+
+
+def delete_class_student_by_student_id_by_class_id(class_id, student_id):
+    sql_script = """
+    DELETE FROM class_student WHERE class_id = %s AND student_id = %s;
+    """
+    result = run_sql_script(sql_script, (class_id, student_id))
+    return result["alerts"]

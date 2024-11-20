@@ -4,8 +4,10 @@ from classStudent import (
     add_class_student,
     get_class_students,
     get_classes_on_shift_of_student,
+    delete_class_student_by_student_id_by_class_id,
 )
 from classes import get_class_by_id
+
 
 class_student_bp = Blueprint("class_student", __name__)
 
@@ -92,3 +94,13 @@ def get_class_students_endpoint():
         return jsonify(class_students), 200
     except:
         return jsonify({"message": "No class students found"}), 404
+
+
+@class_student_bp.route("/class-students/<string:student_id>", methods=["DELETE"])
+def delete_class_student_by_student_id_by_class_id_endpoint():
+    data = request.get_json()
+
+    results = delete_class_student_by_student_id_by_class_id(
+        data["class_id"], data["student_id"]
+    )
+    return jsonify({"message": results}), 200
