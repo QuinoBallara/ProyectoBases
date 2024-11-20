@@ -3,20 +3,22 @@ import { activityType } from '../../consts/activity'
 import Button from '../../components/Button'
 import "./styles.scss"
 import { useModal } from '../../contexts/modalContext'
+import { deleteActivity, getActivities } from '../../api/activity'
+import { useClasses } from '../../contexts/classesContext'
 
 export const ActivityCard = (props: activityType) => {
 
-    const { setActivityModalData, setIsActivityModalUp } = useModal();
+    const { setActivityModalData, setIsActivityModalUp, setActivityEditMode } = useModal();
+    const { setActivities } = useClasses();
 
-    const addActivity = () => {
-        console.log('Activity added')
-    }
-
-    const removeActivity = () => {
-        console.log('Activity removed')
+    const handleDelete = async () => {
+        await deleteActivity(props.id.toString());
+        console.log('Deleted activity with id: ' + props.id);
+        setActivities(await getActivities());
     }
 
     const handleEdit = () => {
+        setActivityEditMode(true);
         setActivityModalData(props)
         setIsActivityModalUp(true);
     }
@@ -31,7 +33,7 @@ export const ActivityCard = (props: activityType) => {
             </div>
             <div className='cardButtonsContainer'>
                 <Button className="edit-button" onClick={handleEdit} label='Edit' />
-                <Button className='delete-button' onClick={removeActivity} label='Delete' />
+                <Button className='delete-button' onClick={handleDelete} label='Delete' />
             </div>
 
         </div>

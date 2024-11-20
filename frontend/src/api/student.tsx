@@ -18,7 +18,6 @@ export const getStudents = async () => {
             'Content-Type': 'application/json',
         }
     });
-    console.log(response)
     return response.json();
 };
 

@@ -1,6 +1,5 @@
-import { API_URL, API_ROUTES } from '../consts/apiRoutes'; // Adjust the import path as needed
+import { API_URL, API_ROUTES } from '../consts/apiRoutes';
 
-// Add Activity
 async function addActivity(activity) {
     const response = await fetch(`${API_URL}${API_ROUTES.activities.add}`, {
         method: 'POST',
@@ -13,7 +12,6 @@ async function addActivity(activity) {
     return data;
 }
 
-// Get Activities
 async function getActivities() {
     const response = await fetch(`${API_URL}${API_ROUTES.activities.get}`, {
         method: 'GET',
@@ -25,7 +23,6 @@ async function getActivities() {
     return data;
 }
 
-// Get Activity by ID
 async function getActivityById(id) {
     const response = await fetch(`${API_URL}${API_ROUTES.activities.getById(id)}`, {
         method: 'GET',
@@ -37,7 +34,6 @@ async function getActivityById(id) {
     return data;
 }
 
-// Modify Activity
 async function modifyActivity(id, activity) {
     const response = await fetch(`${API_URL}${API_ROUTES.activities.modify(id)}`, {
         method: 'PUT',
@@ -50,7 +46,6 @@ async function modifyActivity(id, activity) {
     return data;
 }
 
-// Delete Activity
 async function deleteActivity(id) {
     const response = await fetch(`${API_URL}${API_ROUTES.activities.delete(id)}`, {
         method: 'DELETE',

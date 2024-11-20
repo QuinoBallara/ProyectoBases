@@ -18,7 +18,7 @@
     ```
 3. That's it! The backend is running on `localhost:5001`
 
-To test if it's working, you can either make an API call on postman at `http://localhost:5001/` or run the following commands on your terminal:
+To test if it's working, you can either make an API call on Postman at `http://localhost:5001/` or run the following commands on your terminal:
 1. `docker exec -it mysql_db mysql -u root -p`
 2. Enter the password `root`
 3. `use mydb;`

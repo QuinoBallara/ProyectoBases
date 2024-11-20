@@ -74,13 +74,13 @@ export const ClassesProvider = ({ children }) => {
 
     const [equipments, setEquipments] = useState([
         {
-            id: 1, description: 'Yoga mat', cost: 50, activity: 'Yoga',
+            id: 1, description: 'Yoga mat', cost: 50, activity_id: 'Yoga',
         },
         {
-            id: 2, description: 'Pilates ball', cost: 100, activity: 'Pilates',
+            id: 2, description: 'Pilates ball', cost: 100, activity_id: 'Pilates',
         },
         {
-            id: 3, description: 'Crossfit rope', cost: 150, activity: 'Crossfit',
+            id: 3, description: 'Crossfit rope', cost: 150, activity_id: 'Crossfit',
         }
     ]);
 
@@ -121,7 +121,7 @@ export const ClassesProvider = ({ children }) => {
             setActivities(await getActivities())
             setEquipments(await getAllEquipment())
             setClasses(await getClasses())
-            setRevenues(await activityRevenue() )
+            setRevenues(await activityRevenue())
             setEnrollment(await studentActivity())
             setAttendance(await shiftClass())
             console.log('Big fetch done')

@@ -3,6 +3,8 @@ import './styles.scss';
 import Button from '../../components/Button';
 import { useModal } from '../../contexts/modalContext';
 import Input from '../../components/Input';
+import { useClasses } from '../../contexts/classesContext';
+import { addStudent, modifyStudent } from '../../api/student';
 
 const StudentModal: React.FC = () => {
   const {
@@ -10,7 +12,10 @@ const StudentModal: React.FC = () => {
     setIsStudentModalUp,
     studentModalData,
     setStudentModalData,
+    studentEditMode,
   } = useModal();
+
+  const [originalId, setOriginalId] = React.useState('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -23,13 +28,21 @@ const StudentModal: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log('Student Modal Data Updated:', studentModalData);
-  }, [studentModalData]);
+    setOriginalId(studentModalData.id);
+  }, [isStudentModalUp]);
 
   const closeModal = () => setIsStudentModalUp(false);
 
-  const handleSubmit = () => {
-    console.log('Submitted form:', studentModalData);
+  const handleSubmit = async () => {
+    if (studentModalData.id === '' || studentModalData.first_name === '' || studentModalData.last_name === '' && studentModalData.birth_day === '' && studentModalData.phone === '' && studentModalData.mail === '') {
+      console.log('Not all fields are filled');
+      return;
+    }
+    if (!studentEditMode) {
+      await addStudent(studentModalData);
+    } else {
+      await modifyStudent(originalId, studentModalData);
+    }
     closeModal();
   };
 
@@ -44,13 +57,6 @@ const StudentModal: React.FC = () => {
           />
           <div className="modal-content">
             <div className="form-group">
-              <Input  
-                label="ID"
-                type="text"
-                name="id"
-                value={studentModalData.id || ''}
-                onChange={handleChange}
-              />
               <Input
                 label="First Name"
                 type="text"
@@ -60,7 +66,7 @@ const StudentModal: React.FC = () => {
               />
             </div>
             <div className="form-group">
-              
+
               <Input
                 type="text"
                 label="Last Name"
@@ -74,13 +80,13 @@ const StudentModal: React.FC = () => {
               <Input
                 type="date"
                 label=""
-                name="birth_date"
-                value={studentModalData.birth_date || ''}
+                name="birth_day"
+                value={studentModalData.birth_day || ''}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              
+
               <Input
                 type="tel"
                 label="Phone"
@@ -90,7 +96,7 @@ const StudentModal: React.FC = () => {
               />
             </div>
             <div className="form-group">
-              
+
               <Input
                 type="email"
                 label="Email"

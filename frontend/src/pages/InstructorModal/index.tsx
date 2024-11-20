@@ -6,6 +6,7 @@ import Input4Number from '../../components/Input4Number';
 import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
 import Input from '../../components/Input';
+import { addInstructor, modifyInstructor } from '../../api/instructor';
 
 const InstructorModal: React.FC = () => {
   const {
@@ -13,7 +14,10 @@ const InstructorModal: React.FC = () => {
     setIsInstructorModalUp,
     instructorModalData,
     setInstructorModalData,
+    instructorEditMode,
   } = useModal();
+
+  const [originalId, setOriginalId] = React.useState('');
 
 
   const handleChange = (
@@ -22,16 +26,27 @@ const InstructorModal: React.FC = () => {
     const { name, value } = e.target;
     setInstructorModalData((prevData) => ({
       ...prevData,
-      [name]: value, 
+      [name]: value,
     }));
   };
 
   useEffect(() => {
+    setOriginalId(instructorModalData.id);
   }, [instructorModalData]);
 
   const closeModal = () => setIsInstructorModalUp(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (instructorModalData.id === '' || instructorModalData.first_name === '' || instructorModalData.last_name === '') {
+      console.log('Not all fields are filled');
+      return;
+    }
+    if (!instructorEditMode) {
+      await addInstructor(instructorModalData);
+    } else {
+      await modifyInstructor(originalId, instructorModalData);
+    }
+
     closeModal();
   };
 
@@ -45,13 +60,6 @@ const InstructorModal: React.FC = () => {
             onClick={closeModal}
           />
           <div className="modal-content">
-            <Input  
-              label="ID"
-              type="text"
-              name="id"
-              value={instructorModalData.id || ''}
-              onChange={handleChange}
-            />
             <Input
               label="First Name"
               type="text"
