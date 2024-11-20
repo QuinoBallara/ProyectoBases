@@ -25,7 +25,7 @@ async function addClass(data) {
 }
 
 async function getClasses() {
-    const response = await fetch(`${API_URL}${API_ROUTES.classes.get}`, {
+    const response = await fetch(`${API_URL}${API_ROUTES.views.classProps}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

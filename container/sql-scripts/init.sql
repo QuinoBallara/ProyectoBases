@@ -177,7 +177,10 @@ CREATE VIEW class_props AS
         c.dictated AS dictated,
         c.student_quotas AS student_quotas,
         i.first_name AS instructor,
+        i.id AS instructor_id,
+        s.id AS shift_id,
         s.name AS shift,
+        a.id AS activity_id,
         a.description AS activity
         FROM
             class c
