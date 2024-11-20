@@ -101,7 +101,7 @@ INSERT INTO `equipment` (activity_id, description, cost) VALUES
         (5, 'Cycling Helmet', 25);
 
 INSERT INTO `student` (id, mail, first_name, last_name, birth_day, phone) VALUES
-        ('11111111', 'student1@mail.com', 'Student', 'One', '2000-01-01', '1234567890'),
+        ('11111111', 'student1@mail.com', 'Student', 'One', '2000-01-07', '1234567890'),
         ('22222222', 'student2@mail.com', 'Student', 'Two', '1999-02-02', '2345678901'),
         ('33333333', 'student3@mail.com', 'Student', 'Three', '1998-03-03', '3456789012'),
         ('44444444', 'student4@mail.com', 'Student', 'Four', '1997-04-04', '4567890123'),
