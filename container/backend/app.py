@@ -7,7 +7,11 @@ from instructor_endpoints import instructor_bp
 from login_endpoints import login_bp
 from shift_endpoints import shift_bp
 from student_endpoints import student_bp
+<<<<<<< HEAD
 from flask_cors import CORS
+=======
+from view_endpoints import views_bp
+>>>>>>> aa00a557864e5aef8a7f9561f0d0b4f2b644fb0a
 
 app = Flask(__name__)
 CORS(app)
@@ -21,6 +25,7 @@ app.register_blueprint(instructor_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(shift_bp)
 app.register_blueprint(student_bp)
+app.register_blueprint(views_bp)
 
 
 @app.route("/")
