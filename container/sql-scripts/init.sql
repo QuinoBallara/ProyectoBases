@@ -18,7 +18,7 @@ CREATE TABLE `shift` (
 );
 
 CREATE TABLE `instructor` (
-    `id` VARCHAR(9) NOT NULL PRIMARY KEY UNIQUE,
+    `id` VARCHAR(8) NOT NULL PRIMARY KEY UNIQUE,
     `first_name` VARCHAR(50) NOT NULL,
     `last_name` VARCHAR(50) NOT NULL
 );
@@ -26,7 +26,7 @@ CREATE TABLE `instructor` (
 CREATE TABLE `class` (
     `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `dictated` BOOLEAN NOT NULL,
-    `instructor_id` VARCHAR(9) NOT NULL,
+    `instructor_id` VARCHAR(8) NOT NULL,
     `shift_id` SMALLINT UNSIGNED NOT NULL,
     `activity_id` SMALLINT UNSIGNED NOT NULL,
     `student_quotas` TINYINT UNSIGNED NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `login` (
 );
 
 CREATE TABLE `student` (
-    `id` VARCHAR(9) NOT NULL UNIQUE,
+    `id` VARCHAR(8) NOT NULL UNIQUE,
     `mail` VARCHAR(100) NOT NULL,
     `first_name` VARCHAR(50) NOT NULL,
     `last_name` VARCHAR(50) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `equipment` (
 
 CREATE TABLE `class_student` (
     `class_id` SMALLINT UNSIGNED NOT NULL,
-    `student_id` VARCHAR(9) NOT NULL,
+    `student_id` VARCHAR(8) NOT NULL,
     `equipment_id` SMALLINT UNSIGNED NULL,
     PRIMARY KEY (`class_id`, `student_id`),
     FOREIGN KEY (`class_id`) REFERENCES `class`(`id`),

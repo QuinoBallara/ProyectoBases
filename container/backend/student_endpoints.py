@@ -17,6 +17,8 @@ def validate_data(data):
         return "id is required"
     if not isinstance(data["id"], str):
         return "id must be a string"
+    elif not len(data["id"]) == 8:
+        return "id must be 8 characters long"
     if not data["mail"]:
         return "mail is required"
     if not isinstance(data["mail"], str):

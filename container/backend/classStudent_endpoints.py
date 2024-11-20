@@ -13,6 +13,8 @@ def validate_data(data):
         return "student_id is required"
     if not isinstance(data["student_id"], str):
         return "student_id must be a string"
+    elif not len(data["student_id"]) == 8:
+        return "student_id must be 8 characters long"
     if data["equipment_id"]:
         if not isinstance(data["equipment_id"], int):
             return "equipment_id must be a int"

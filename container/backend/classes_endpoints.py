@@ -22,8 +22,10 @@ def validate_data(data):
         return "dictated must be a boolean"
     if not data["instructor_id"]:
         return "instructor_id is required"
-    if not isinstance(data["instructor_id"], int):
-        return "instructor_id must be an integer"
+    if not isinstance(data["instructor_id"], str):
+        return "instructor_id must be an string"
+    elif not len(data["instructor_id"]) == 8:
+        return "instructor_id must be 8 characters long"
     if not data["shift_id"]:
         return "shift_id is required"
     if not isinstance(data["shift_id"], int):
