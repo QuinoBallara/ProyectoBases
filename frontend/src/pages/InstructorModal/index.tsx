@@ -49,7 +49,6 @@ const InstructorModal: React.FC = () => {
       return;
     }
     if (!instructorEditMode) {
-      console.log(instructorModalData)
       await addInstructor(instructorModalData);
     } else {
       await modifyInstructor(originalId, instructorModalData);
