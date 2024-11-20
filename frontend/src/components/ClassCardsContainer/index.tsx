@@ -8,6 +8,7 @@ import { ClassCard } from '../ClassCard'
 export const ClassCardsContainer = () => {
   const { classes } = useClasses(); 
 
+ 
   return (
     <div className='container'>
       {classes.map((card: ClassProps, index: number) => (  

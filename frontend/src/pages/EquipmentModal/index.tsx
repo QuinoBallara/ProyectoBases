@@ -20,6 +20,8 @@ export const EquipmentModal: React.FC = () => {
 
     const { activities } = useClasses();
 
+    const activity = activities.find((activity) => activity.id === equipmentModalData.activity_id);
+
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
@@ -76,7 +78,7 @@ export const EquipmentModal: React.FC = () => {
                         />
                         <Dropdown label='Activity' options={activities.map((activity) => {
                             return { value: activity.id, label: activity.description }
-                        })} onChange={handleChange} name='activity_id' value={equipmentModalData.activity} />
+                        })} onChange={handleChange} name='activity_id' value={activity} />
                         <Input4Number label='Cost' value={equipmentModalData.cost || 0} onChange={handleChange} name='cost' />
                     </div>
                     <Button

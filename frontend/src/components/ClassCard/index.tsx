@@ -48,10 +48,10 @@ export const ClassCard = (props: ClassProps) => {
     <div className='card'>
 
       <div className='cardText'>
-        <h2 className='card-title'>{props.activity}</h2>
-        <p><b>Instructor:</b> {props.instructor}</p>
-        <p><b>Shift:</b> {props.shift}</p>
-        <p><b>Quotas:</b> {props.studentQuotas}</p>
+        <h2 className='card-title'>{props.activity_description}</h2>
+        <p><b>Instructor:</b> {props.instructor_first_name}</p>
+        <p><b>Shift:</b> {props.shift_name}</p>
+        <p><b>Quotas:</b> {props.student_quotas}</p>
       </div>
 
 

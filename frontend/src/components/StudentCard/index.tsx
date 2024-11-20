@@ -13,14 +13,6 @@ export const StudentCard = (props: student) => {
   const { setStudentModalData, setIsStudentModalUp, setStudentEditMode } = useModal();
   const { setStudents } = useClasses();
 
-  // const [selectedActivity, setSelectedActivity] = useState<string>('None');
-  // const { classes, setClass } = useClasses();
-
-  // const activitiesOptions = useMemo(() => {
-  //   let list = activities.map(acitivity => ({ value: acitivity.id.toString(), label: `${acitivity.activity}` }))
-  //   list.unshift({ value: "", label: '' });
-  //   return list;
-  // }, [activities]);
 
 
   const addClass = () => {

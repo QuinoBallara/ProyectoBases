@@ -5,6 +5,7 @@ import Dropdown from '../../components/DropdownPolenta';
 import Input4Number from '../../components/Input4Number';
 import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
+import { instructor } from '../../consts/instructor';
 
 const ClassModal: React.FC = () => {
   const {
@@ -13,8 +14,15 @@ const ClassModal: React.FC = () => {
     classModalData,
     setClassModalData,
   } = useModal();
+  
+
+  console.log(classModalData);
 
   const { instructors, shifts, activities } = useClasses();
+
+  const activity = activities.find((activity) => activity.id === classModalData.activity_id);
+  const instructor = instructors.find((instructor) => instructor.id === classModalData.instructor_id);
+  const shift = shifts.find((shift) => shift.id === classModalData.shift_id);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -57,9 +65,9 @@ const ClassModal: React.FC = () => {
           <div className="modal-content">
             <Dropdown
               label="Instructor"
-              options={instructors.map((instructor: { first_name: string; last_name: string }) => {
+              options={instructors.map((instructor: instructor) => {
                 const fullName = `${instructor.first_name} ${instructor.last_name}`;
-                return { value: fullName, label: fullName };
+                return { value: instructor.id, label: fullName };
               })}
               value={classModalData.instructor}
               onChange={handleChange}
