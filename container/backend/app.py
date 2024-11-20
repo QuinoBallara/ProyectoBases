@@ -7,8 +7,10 @@ from instructor_endpoints import instructor_bp
 from login_endpoints import login_bp
 from shift_endpoints import shift_bp
 from student_endpoints import student_bp
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Register Blueprints
 app.register_blueprint(activity_bp)
