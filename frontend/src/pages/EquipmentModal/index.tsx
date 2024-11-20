@@ -34,7 +34,14 @@ export const EquipmentModal: React.FC = () => {
 
     }, [equipmentModalData]);
 
-    const closeModal = () => setIsEquipmentModalUp(false);
+    const closeModal = () => {
+        setEquipmentModalData({
+            description: '',
+            activity: '',
+            cost: 0,
+        });
+        setIsEquipmentModalUp(false)
+    };
 
     const handleSubmit = async () => {
         if (equipmentModalData.description === '' || equipmentModalData.activity === '') {

@@ -34,14 +34,22 @@ const InstructorModal: React.FC = () => {
     setOriginalId(instructorModalData.id);
   }, [instructorModalData]);
 
-  const closeModal = () => setIsInstructorModalUp(false);
+  const closeModal = () => {
+    setInstructorModalData({
+      id: '',
+      first_name: '',
+      last_name: '',
+    })
+    setIsInstructorModalUp(false)
+  };
 
   const handleSubmit = async () => {
-    if (instructorModalData.id === '' || instructorModalData.first_name === '' || instructorModalData.last_name === '') {
+    if ((!instructorEditMode && instructorModalData.id === '') || instructorModalData.first_name === '' || instructorModalData.last_name === '') {
       console.log('Not all fields are filled');
       return;
     }
     if (!instructorEditMode) {
+      console.log(instructorModalData)
       await addInstructor(instructorModalData);
     } else {
       await modifyInstructor(originalId, instructorModalData);
@@ -60,6 +68,13 @@ const InstructorModal: React.FC = () => {
             onClick={closeModal}
           />
           <div className="modal-content">
+            {(!instructorEditMode) && (<Input
+              label="ID"
+              type="text"
+              name="id"
+              value={instructorModalData.id || ''}
+              onChange={handleChange}
+            />)}
             <Input
               label="First Name"
               type="text"
