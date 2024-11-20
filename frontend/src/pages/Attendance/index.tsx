@@ -13,15 +13,15 @@ const Attendance: React.FC = () => {
               <tr>
                 <th>ID</th>
                 <th>Shift</th>
-                <th>Total</th>
+                <th>Attendance</th>
               </tr>
             </thead>
             <tbody>
               {attendance.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.id}</td>
-                  <td>{row.shift}</td>
-                  <td>{row.total}</td>
+                <tr key={row.shift_id}>
+                  <td>{row.shift_id}</td>
+                  <td>{row.shift_name}</td>
+                  <td>{row.total_classes}</td>
                 </tr>
               ))}
             </tbody>

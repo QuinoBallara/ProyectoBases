@@ -62,5 +62,11 @@ export const API_ROUTES = {
     getByMail: (mail: string) => `/logins/${mail}`,
     delete: (mail: string) => `/logins/${mail}`,
 
-  }
+  },
+  views: {
+    activityRevenue: '/activity_revenue',
+    studentActivity: '/student_activity',
+    shiftClass: '/shift_class',
+    classProps: '/class_props',
+  },
 };

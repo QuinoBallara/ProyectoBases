@@ -5,6 +5,7 @@ import { getShifts } from '../api/shift';
 import { getInstructors } from '../api/instructor';
 import { getClasses } from '../api/class';
 import { getAllEquipment } from '../api/equipment';
+import { activityRevenue, studentActivity, shiftClass } from '../api/views';
 
 
 const ClassesContext = createContext();
@@ -120,6 +121,9 @@ export const ClassesProvider = ({ children }) => {
             setActivities(await getActivities())
             setEquipments(await getAllEquipment())
             setClasses(await getClasses())
+            setRevenues(await activityRevenue() )
+            setEnrollment(await studentActivity())
+            setAttendance(await shiftClass())
             console.log('Big fetch done')
         }
         catch (error) {
