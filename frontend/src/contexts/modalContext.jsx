@@ -5,11 +5,17 @@ const ModalContext = createContext();
 export const ModalProvider = ({ children }) => {
 
     const [isClassModalUp, setIsClassModalUp_] = useState(false);
+    const [classEditMode, setClassEditMode] = useState(true);
     const [isInstructorModalUp, setIsInstructorModalUp] = useState(false);
+    const [instructorEditMode, setInstructorEditMode] = useState(true);
     const [isShiftModalUp, setIsShiftModalUp] = useState(false);
+    const [shiftEditMode, setShiftEditMode] = useState(true);
     const [isStudentModalUp, setIsStudentModalUp] = useState(false);
+    const [studentEditMode, setStudentEditMode] = useState(true);
     const [isActivityModalUp, setIsActivityModalUp] = useState(false);
+    const [activityEditMode, setActivityEditMode] = useState(true);
     const [isEquipmentModalUp, setIsEquipmentModalUp] = useState(false);
+    const [equipmentEditMode, setEquipmentEditMode] = useState(true);
 
     const [classModalData, setClassModalData] = useState({
         instructor: 'any',
@@ -61,12 +67,12 @@ export const ModalProvider = ({ children }) => {
 
     return (
         <ModalContext.Provider value={{
-            isClassModalUp, setIsClassModalUp, classModalData, setClassModalData,
-            isInstructorModalUp, setIsInstructorModalUp, instructorModalData, setInstructorModalData,
-            isShiftModalUp, setIsShiftModalUp, shiftModalData, setShiftModalData,
-            isStudentModalUp, setIsStudentModalUp, studentModalData, setStudentModalData,
-            isActivityModalUp, setIsActivityModalUp, activityModalData, setActivityModalData,
-            isEquipmentModalUp, setIsEquipmentModalUp, equipmentModalData, setEquipmentModalData
+            isClassModalUp, setIsClassModalUp, classModalData, setClassModalData, classEditMode, setClassEditMode,
+            isInstructorModalUp, setIsInstructorModalUp, instructorModalData, setInstructorModalData, instructorEditMode, setInstructorEditMode,
+            isShiftModalUp, setIsShiftModalUp, shiftModalData, setShiftModalData, shiftEditMode, setShiftEditMode,
+            isStudentModalUp, setIsStudentModalUp, studentModalData, setStudentModalData, studentEditMode, setStudentEditMode,
+            isActivityModalUp, setIsActivityModalUp, activityModalData, setActivityModalData, activityEditMode, setActivityEditMode,
+            isEquipmentModalUp, setIsEquipmentModalUp, equipmentModalData, setEquipmentModalData, equipmentEditMode, setEquipmentEditMode,
         }}>
             {children}
         </ModalContext.Provider>

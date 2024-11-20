@@ -6,6 +6,7 @@ import Input4Number from '../../components/Input4Number';
 import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
 import Input from '../../components/Input';
+import { addActivity, modifyActivity } from '../../api/activity';
 
 const ActivitiesModal: React.FC = () => {
     const {
@@ -13,6 +14,7 @@ const ActivitiesModal: React.FC = () => {
         setIsActivityModalUp,
         activityModalData,
         setActivityModalData,
+        activityEditMode,
     } = useModal();
 
     const handleChange = (
@@ -31,8 +33,22 @@ const ActivitiesModal: React.FC = () => {
 
     const closeModal = () => setIsActivityModalUp(false);
 
-    const handleSubmit = () => {
-        console.log('Submitted form:', activityModalData);
+    const handleSubmit = async () => {
+        if (
+            activityModalData.description === '' ||
+            activityModalData.cost === '' ||
+            activityModalData.min_age === '' ||
+            activityModalData.max_age === ''
+        ) {
+            console.log('Not all fields are filled');
+            return;
+        }
+        if (!activityEditMode) {
+            await addActivity(activityModalData);
+        } else {
+            await modifyActivity(activityModalData.id, activityModalData);
+        }
+
         closeModal();
     };
 

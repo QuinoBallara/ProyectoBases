@@ -30,9 +30,9 @@ CREATE TABLE `class` (
     `shift_id` SMALLINT UNSIGNED NOT NULL,
     `activity_id` SMALLINT UNSIGNED NOT NULL,
     `student_quotas` TINYINT UNSIGNED NOT NULL,
-    FOREIGN KEY (`shift_id`) REFERENCES `shift`(`id`),
-    FOREIGN KEY (`activity_id`) REFERENCES `activity`(`id`),
-    FOREIGN KEY (`instructor_id`) REFERENCES `instructor`(`id`),
+    FOREIGN KEY (`shift_id`) REFERENCES `shift`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`activity_id`) REFERENCES `activity`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`instructor_id`) REFERENCES `instructor`(`id`) ON DELETE CASCADE,
     UNIQUE KEY `instructor_shift` (`instructor_id`, `shift_id`)
 );
 
@@ -58,7 +58,7 @@ CREATE TABLE `equipment` (
     `activity_id` SMALLINT UNSIGNED NOT NULL,
     `description` VARCHAR(255) NULL DEFAULT 'undefined',
     `cost` BIGINT UNSIGNED NOT NULL,
-    FOREIGN KEY (`activity_id`) REFERENCES `activity`(`id`)
+    FOREIGN KEY (`activity_id`) REFERENCES `activity`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `class_student` (
@@ -66,9 +66,9 @@ CREATE TABLE `class_student` (
     `student_id` VARCHAR(9) NOT NULL,
     `equipment_id` SMALLINT UNSIGNED NULL,
     PRIMARY KEY (`class_id`, `student_id`),
-    FOREIGN KEY (`class_id`) REFERENCES `class`(`id`),
-    FOREIGN KEY (`student_id`) REFERENCES `student`(`id`),
-    FOREIGN KEY (`equipment_id`) REFERENCES `equipment`(`id`)
+    FOREIGN KEY (`class_id`) REFERENCES `class`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`student_id`) REFERENCES `student`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`equipment_id`) REFERENCES `equipment`(`id`) ON DELETE CASCADE
 );
 
 CREATE VIEW activity_revenue AS

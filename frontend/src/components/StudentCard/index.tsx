@@ -4,20 +4,17 @@ import Dropdown from '../DropdownPolenta'
 import './styles.scss'
 import Button from '../Button'
 import { useModal } from '../../contexts/modalContext'
+import { deleteStudent } from '../../api/student'
+import { useClasses } from '../../contexts/classesContext'
+import { getActivities } from '../../api/activity'
+import { getStudents } from '../../api/student'
 
 export const StudentCard = (props: student) => {
+  const { setStudentModalData, setIsStudentModalUp, setStudentEditMode } = useModal();
+  const { setStudents } = useClasses();
+
   const [selectedActivity, setSelectedActivity] = useState<string>('None');
-  const [activities, setActivities] = useState([
-    {
-      id: 1, activity: 'Activity 1', instructor: 'Instructor 1', shift: 'Shift 1', studentQuotas: 10,
-    },
-    {
-      id: 2, activity: 'Activity 2', instructor: 'Instructor 2', shift: 'Shift 2', studentQuotas: 10,
-    },
-    {
-      id: 3, activity: 'Activity 3', instructor: 'Instructor 3', shift: 'Shift 3', studentQuotas: 10,
-    },
-  ]);
+  const { activities, setActivities } = useClasses();
 
   const activitiesOptions = useMemo(() => {
     let list = activities.map(acitivity => ({ value: acitivity.id.toString(), label: `${acitivity.activity}` }))
@@ -25,20 +22,21 @@ export const StudentCard = (props: student) => {
     return list;
   }, [activities]);
 
-  useEffect(() => {
-    //fecthActivities();
-  })
-
   const addActivity = () => {
 
   }
 
-  const handleDelete = (): void => { };
+  const handleDelete = async () => {
+    await deleteStudent(props.id.toString());
+    console.log('Deleted student with id: ' + props.id);
+    setStudents(await getStudents());
+  };
 
-  const { setStudentModalData, setIsStudentModalUp } = useModal();
-
-  const handleEdit = (): void => { setStudentModalData(props); setIsStudentModalUp(true); };
-
+  const handleEdit = (): void => {
+    setStudentEditMode(true);
+    setStudentModalData(props);
+    setIsStudentModalUp(true);
+  };
 
   return (
     <div className='card'>
