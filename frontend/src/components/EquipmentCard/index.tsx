@@ -24,11 +24,13 @@ export const EquipmentCard = (props: EquipmentProps) => {
         setEquipments(await getAllEquipment());
      };
 
+    const activity = activities.find((activity) => activity.id === props.activity_id);
+
     return (
         <div className='card'>
             <div className='cardText'>
                 <h2 className='card-title'>{props.description}</h2>
-                <p><b>Activity:</b> {props.activity_id}</p>
+                <p><b>Activity:</b> {activity.description}</p>
                 <p><b>Cost:</b> {props.cost}</p>
             </div>
 
