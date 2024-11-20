@@ -14,7 +14,7 @@ const ClassModal: React.FC = () => {
     setClassModalData,
   } = useModal();
 
-  const {instructors, shifts, activities} = useClasses();
+  const { instructors, shifts, activities } = useClasses();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -30,7 +30,15 @@ const ClassModal: React.FC = () => {
     console.log(classModalData.instructor);
   }, [classModalData]);
 
-  const closeModal = () => setIsClassModalUp(false);
+  const closeModal = () => {
+    setClassModalData({
+      instructor: '',
+      shift: '',
+      activity: '',
+      quotas: 0,
+    })
+    setIsClassModalUp(false)
+  };
 
   const handleSubmit = () => {
     console.log('Submitted form:', classModalData);
@@ -59,7 +67,7 @@ const ClassModal: React.FC = () => {
             />
             <Dropdown
               label="Shift"
-              options={shifts.map((shift: { name: string}) => {
+              options={shifts.map((shift: { name: string }) => {
                 return { value: shift.name, label: shift.name };
               })}
               value={classModalData.shift}
@@ -68,7 +76,7 @@ const ClassModal: React.FC = () => {
             />
             <Dropdown
               label="Activity"
-              options={activities.map((activity: { description: string}) => {
+              options={activities.map((activity: { description: string }) => {
                 return { value: activity.description, label: activity.description };
               })}
               value={classModalData.activity}

@@ -28,10 +28,17 @@ const ActivitiesModal: React.FC = () => {
     };
 
     useEffect(() => {
-        console.log(activityModalData.instructor);
     }, [activityModalData]);
 
-    const closeModal = () => setIsActivityModalUp(false);
+    const closeModal = () => {
+        setActivityModalData({
+            description: '',
+            cost: 0,
+            min_age: 0,
+            max_age: 0,
+        })
+        setIsActivityModalUp(false)
+    };
 
     const handleSubmit = async () => {
         if (
@@ -70,7 +77,7 @@ const ActivitiesModal: React.FC = () => {
                         />
                         <Input4Number
                             label="Cost"
-                            value={activityModalData.Cost}
+                            value={activityModalData.cost}
                             onChange={handleChange}
                             name="cost"
                         />

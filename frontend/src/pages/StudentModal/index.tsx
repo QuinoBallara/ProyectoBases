@@ -31,10 +31,20 @@ const StudentModal: React.FC = () => {
     setOriginalId(studentModalData.id);
   }, [isStudentModalUp]);
 
-  const closeModal = () => setIsStudentModalUp(false);
+  const closeModal = () => {
+    setStudentModalData({
+      id: '',
+      first_name: '',
+      last_name: '',
+      birth_day: '',
+      phone: '',
+      mail: '',
+    })
+    setIsStudentModalUp(false)
+  };
 
   const handleSubmit = async () => {
-    if (studentModalData.id === '' || studentModalData.first_name === '' || studentModalData.last_name === '' && studentModalData.birth_day === '' && studentModalData.phone === '' && studentModalData.mail === '') {
+    if ((!studentEditMode && studentModalData.id === '') || studentModalData.first_name === '' || studentModalData.last_name === '' && studentModalData.birth_day === '' && studentModalData.phone === '' && studentModalData.mail === '') {
       console.log('Not all fields are filled');
       return;
     }
@@ -56,6 +66,13 @@ const StudentModal: React.FC = () => {
             onClick={closeModal}
           />
           <div className="modal-content">
+            {(!studentEditMode) && (<Input
+              label="ID"
+              type="text"
+              name="id"
+              value={studentModalData.id || ''}
+              onChange={handleChange}
+            />)}
             <div className="form-group">
               <Input
                 label="First Name"
@@ -86,7 +103,6 @@ const StudentModal: React.FC = () => {
               />
             </div>
             <div className="form-group">
-
               <Input
                 type="tel"
                 label="Phone"

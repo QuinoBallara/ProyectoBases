@@ -30,10 +30,18 @@ const ShiftModal: React.FC = () => {
   useEffect(() => {
   }, [shiftModalData]);
 
-  const closeModal = () => setIsShiftModalUp(false);
+  const closeModal = () => {
+    setShiftModalData({
+      id: '',
+      name: '',
+      start_time: '',
+      end_time: '',
+    })
+    setIsShiftModalUp(false)
+  };
 
   const handleSubmit = async () => {
-    if (shiftModalData.id === '' || shiftModalData.name === '' || shiftModalData.start_time === '' || shiftModalData.end_time === '') {
+    if (shiftModalData.name === '' || shiftModalData.start_time === '' || shiftModalData.end_time === '') {
       console.log('Not all fields are filled');
       return;
     }
