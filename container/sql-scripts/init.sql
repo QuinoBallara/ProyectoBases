@@ -115,6 +115,8 @@ CREATE VIEW shift_class AS
         shift s
     JOIN    
         class c ON s.id = c.shift_id
+    WHERE 
+        c.dictated = 1
     GROUP BY
         s.id
     ORDER BY
