@@ -1,4 +1,4 @@
-import { API_URL, API_ROUTES } from '../consts/apiRoutes'; 
+import { API_URL, API_ROUTES } from '../consts/apiRoutes';
 
 export const addEquipment = async (equipment) => {
     const response = await fetch(`${API_URL}${API_ROUTES.equipment.add}`, {

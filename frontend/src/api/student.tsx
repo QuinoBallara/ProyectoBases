@@ -1,4 +1,4 @@
-import { API_URL, API_ROUTES } from '../consts/apiRoutes'; 
+import { API_URL, API_ROUTES } from '../consts/apiRoutes';
 
 export const addStudent = async (student) => {
     const response = await fetch(`${API_URL}${API_ROUTES.students.add}`, {
@@ -14,7 +14,11 @@ export const addStudent = async (student) => {
 export const getStudents = async () => {
     const response = await fetch(`${API_URL}${API_ROUTES.students.get}`, {
         method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
     });
+    console.log(response)
     return response.json();
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../components/TopBar';
 import Dropdown from '../../components/DropdownPolenta';
 import { ClassCardsContainer } from '../../components/ClassCardsContainer';
@@ -9,9 +9,9 @@ import ClassModal from '../ClassModal';
 import { useModal } from '../../contexts/modalContext';
 
 export const Home = () => {
-  const { filters, setFilters } = useClasses();
+  const { filters, setFilters, bigFetch } = useClasses();
 
-  const {isClassModalUp, setIsClassModalUp} = useModal();
+  const { isClassModalUp, setIsClassModalUp } = useModal();
 
   const handleFilterChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
@@ -23,6 +23,13 @@ export const Home = () => {
     }));
   };
 
+  useEffect(() => {
+    const bigFetches = async () => {
+      await bigFetch();
+      console.log('big fetch');
+    }
+    bigFetches();
+  }, [])
 
 
   return (

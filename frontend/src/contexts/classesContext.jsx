@@ -1,4 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { getActivities } from '../api/activity';
+import { getStudents } from '../api/student';
+import { getShifts } from '../api/shift';
+import { getInstructors } from '../api/instructor';
+import { getClasses } from '../api/class';
+import { getAllEquipment } from '../api/equipment';
+
 
 const ClassesContext = createContext();
 
@@ -105,8 +112,23 @@ export const ClassesProvider = ({ children }) => {
         setClasses(filteredClasses);
     }, [filters, allClasses]);
 
+    const bigFetch = async () => {
+        try {
+            setStudents(await getStudents())
+            setShifts(await getShifts())
+            setInstructors(await getInstructors())
+            setActivities(await getActivities())
+            setEquipments(await getAllEquipment())
+            setClasses(await getClasses())
+            console.log('Big fetch done')
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments }}>
+        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments, bigFetch }}>
             {children}
         </ClassesContext.Provider>
     );
