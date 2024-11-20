@@ -11,10 +11,28 @@ from shift import (
 shift_bp = Blueprint("shift", __name__)
 
 
+def validate_data(data):
+    if not data["name"]:
+        return "name is required"
+    if not isinstance(data["name"], str):
+        return "name must be a string"
+    if not data["start_time"]:
+        return "start_time is required"
+    if not isinstance(data["start_time"], str):
+        return "start_time must be a string"
+    if not data["end_time"]:
+        return "end_time is required"
+    if not isinstance(data["end_time"], str):
+        return "end_time must be a string"
+    return True
+
+
 # working
 @shift_bp.route("/shifts", methods=["POST"])
 def add_shift_endpoint():
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     shift = Shift(
         name=data["name"],
         start_time=data["start_time"],
@@ -65,6 +83,8 @@ def get_shift_by_id_endpoint(shift_id):
 @shift_bp.route("/shifts/<int:shift_id>", methods=["PUT"])
 def modify_shift_endpoint(shift_id):
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     shift = Shift(
         name=data["name"],
         start_time=data["start_time"],

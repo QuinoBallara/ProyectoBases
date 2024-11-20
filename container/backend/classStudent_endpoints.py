@@ -4,10 +4,27 @@ from classStudent import ClassStudent, add_class_student, get_class_students
 class_student_bp = Blueprint("class_student", __name__)
 
 
+def validate_data(data):
+    if not data["class_id"]:
+        return "class_id is required"
+    if not isinstance(data["class_id"], int):
+        return "class_id must be an integer"
+    if not data["student_id"]:
+        return "student_id is required"
+    if not isinstance(data["student_id"], str):
+        return "student_id must be a string"
+    if data["equipment_id"]:
+        if not isinstance(data["equipment_id"], int):
+            return "equipment_id must be a int"
+    return True
+
+
 # working
 @class_student_bp.route("/class-students", methods=["POST"])
 def add_class_student_endpoint():
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     class_student = ClassStudent(
         class_id=data["class_id"],
         student_id=data["student_id"],

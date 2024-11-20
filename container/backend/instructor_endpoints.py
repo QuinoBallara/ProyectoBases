@@ -11,10 +11,28 @@ from instructor import (
 instructor_bp = Blueprint("instructor", __name__)
 
 
+def validate_data(data):
+    if not data["id"]:
+        return "id is required"
+    if not isinstance(data["id"], str):
+        return "id must be a string"
+    if not data["first_name"]:
+        return "first_name is required"
+    if not isinstance(data["first_name"], str):
+        return "first_name must be a string"
+    if not data["last_name"]:
+        return "last_name is required"
+    if not isinstance(data["last_name"], str):
+        return "last_name must be a string"
+    return True
+
+
 # working
 @instructor_bp.route("/instructors", methods=["POST"])
 def add_instructor_endpoint():
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     instructor = Instructor(
         id=data["id"], first_name=data["first_name"], last_name=data["last_name"]
     )
@@ -61,6 +79,8 @@ def get_instructor_by_id_endpoint(instructor_id):
 @instructor_bp.route("/instructors/<string:instructor_id>", methods=["PUT"])
 def modify_instructor_endpoint(instructor_id):
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     instructor = Instructor(
         id=data["id"], first_name=data["first_name"], last_name=data["last_name"]
     )

@@ -11,10 +11,29 @@ from activity import (
 activity_bp = Blueprint("activity", __name__)
 
 
+def validate_data(data):
+    if data["description"]:
+        if not isinstance(data["description"], str):
+            return "description must be a string"
+    if not data["cost"]:
+        return "cost is required"
+    if not isinstance(data["cost"], int):
+        return "cost must be an integer"
+    if data["min_age"]:
+        if not isinstance(data["min_age"], int):
+            return "min_age must be an integer"
+    if data["max_age"]:
+        if not isinstance(data["max_age"], int):
+            return "max_age must be an integer"
+    return True
+
+
 # working
 @activity_bp.route("/activities", methods=["POST"])
 def add_activity_endpoint():
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     activity = Activity(
         description=data["description"],
         cost=data["cost"],
@@ -68,6 +87,8 @@ def get_activity_by_id_endpoint(id):
 @activity_bp.route("/activities/<int:id>", methods=["PUT"])
 def modify_activity_endpoint(id):
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     activity = Activity(
         description=data["description"],
         cost=data["cost"],
