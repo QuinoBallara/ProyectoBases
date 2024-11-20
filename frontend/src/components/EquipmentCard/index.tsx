@@ -4,25 +4,31 @@ import './styles.scss'
 import Button from '../Button'
 import { useModal } from '../../contexts/modalContext'
 import Dropdown from '../DropdownPolenta'
+import { deleteEquipment } from '../../api/equipment'
+import { useClasses } from '../../contexts/classesContext'
+import { getAllEquipment } from '../../api/equipment'
 
 export const EquipmentCard = (props: EquipmentProps) => {
-    const { isEquipmentModalUp, setIsEquipmentModalUp, setEquipmentModalData, equipmentModalData } = useModal();
+    const { isEquipmentModalUp, setIsEquipmentModalUp, setEquipmentModalData, equipmentModalData, setEquipmentEditMode } = useModal();
+    const {activities, setEquipments} = useClasses();
 
     const handleEdit = (): void => {
+        setEquipmentEditMode(true);
         setEquipmentModalData(props);
         setIsEquipmentModalUp(true);
-        console.log(isEquipmentModalUp)
     }
 
-    const addStudent = (): void => { };
 
-    const handleDelete = (): void => { };
+    const handleDelete = async () => {
+        await deleteEquipment(props.id.toString());
+        setEquipments(await getAllEquipment());
+     };
 
     return (
         <div className='card'>
             <div className='cardText'>
                 <h2 className='card-title'>{props.description}</h2>
-                <p><b>Activity:</b> {props.activity}</p>
+                <p><b>Activity:</b> {props.activity_id}</p>
                 <p><b>Cost:</b> {props.cost}</p>
             </div>
 

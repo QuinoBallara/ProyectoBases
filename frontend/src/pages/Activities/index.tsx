@@ -17,7 +17,7 @@ export const Activities = () => {
             }
         }
         fetchActivities();
-    }, [isActivityModalUp, activities]);
+    }, [isActivityModalUp]);
 
     return (
         <div className='activities' style={{ width: '100%' }}>
