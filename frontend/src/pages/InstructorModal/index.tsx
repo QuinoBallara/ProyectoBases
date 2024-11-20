@@ -17,6 +17,8 @@ const InstructorModal: React.FC = () => {
     instructorEditMode,
   } = useModal();
 
+  const [originalId, setOriginalId] = React.useState('');
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -29,6 +31,7 @@ const InstructorModal: React.FC = () => {
   };
 
   useEffect(() => {
+    setOriginalId(instructorModalData.id);
   }, [instructorModalData]);
 
   const closeModal = () => setIsInstructorModalUp(false);
@@ -41,7 +44,7 @@ const InstructorModal: React.FC = () => {
     if (!instructorEditMode) {
       await addInstructor(instructorModalData);
     } else {
-      await modifyInstructor(instructorModalData.id, instructorModalData);
+      await modifyInstructor(originalId, instructorModalData);
     }
 
     closeModal();
@@ -57,13 +60,6 @@ const InstructorModal: React.FC = () => {
             onClick={closeModal}
           />
           <div className="modal-content">
-            <Input
-              label="ID"
-              type="text"
-              name="id"
-              value={instructorModalData.id || ''}
-              onChange={handleChange}
-            />
             <Input
               label="First Name"
               type="text"

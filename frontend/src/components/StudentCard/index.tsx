@@ -13,16 +13,17 @@ export const StudentCard = (props: student) => {
   const { setStudentModalData, setIsStudentModalUp, setStudentEditMode } = useModal();
   const { setStudents } = useClasses();
 
-  const [selectedActivity, setSelectedActivity] = useState<string>('None');
-  const { activities, setActivities } = useClasses();
+  // const [selectedActivity, setSelectedActivity] = useState<string>('None');
+  // const { classes, setClass } = useClasses();
 
-  const activitiesOptions = useMemo(() => {
-    let list = activities.map(acitivity => ({ value: acitivity.id.toString(), label: `${acitivity.activity}` }))
-    list.unshift({ value: "", label: '' });
-    return list;
-  }, [activities]);
+  // const activitiesOptions = useMemo(() => {
+  //   let list = activities.map(acitivity => ({ value: acitivity.id.toString(), label: `${acitivity.activity}` }))
+  //   list.unshift({ value: "", label: '' });
+  //   return list;
+  // }, [activities]);
 
-  const addActivity = () => {
+
+  const addClass = () => {
 
   }
 
@@ -51,10 +52,10 @@ export const StudentCard = (props: student) => {
 
 
       <div className='cardButtonsContainer'>
-        <div className='addActivity-box'>
+        {/* <div className='addActivity-box'>
           <Dropdown label='Student' value={selectedActivity} onChange={(value) => setSelectedActivity(value.target.value)} name='Add Activity' options={activitiesOptions} />
           <Button label='Add' onClick={() => addActivity()} />
-        </div>
+        </div> */}
         <Button
           className='edit-button'
           label="Edit"
