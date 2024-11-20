@@ -1,5 +1,6 @@
 export type EquipmentProps = {
-    activity: string;
+    id: string;
+    activity_id: string;
     description: string;
     cost: number;
 }

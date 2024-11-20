@@ -53,7 +53,7 @@ export const ModalProvider = ({ children }) => {
     });
 
     const [equipmentModalData, setEquipmentModalData] = useState({
-        activity: '',
+        activity_id: '',
         description: '',
         cost: '',
     });

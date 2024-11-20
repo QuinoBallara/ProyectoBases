@@ -9,6 +9,7 @@ import ClassModal from '../ClassModal';
 import { useModal } from '../../contexts/modalContext';
 
 export const Home = () => {
+
   const { filters, setFilters, bigFetch } = useClasses();
 
   const { isClassModalUp, setIsClassModalUp } = useModal();
