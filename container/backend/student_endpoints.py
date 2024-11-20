@@ -7,6 +7,7 @@ from student import (
     modify_student,
     delete_student,
 )
+import datetime
 
 student_bp = Blueprint("student", __name__)
 
@@ -39,7 +40,7 @@ def get_students_endpoint():
                 "mail": student[1],
                 "first_name": student[2],
                 "last_name": student[3],
-                "birth_day": student[4],
+                "birth_day": student[4].strftime("%Y-%m-%d"),
                 "phone": student[5],
             }
             for student in students[0]
@@ -60,7 +61,7 @@ def get_student_by_id_endpoint(student_id):
             "mail": student[0][0][1],
             "first_name": student[0][0][2],
             "last_name": student[0][0][3],
-            "birth_day": student[0][0][4],
+            "birth_day": student[0][0][4].strftime("%Y-%m-%d"),
             "phone": student[0][0][5],
         }
         return jsonify(formatted_students), 200

@@ -29,6 +29,7 @@ services:
       DB_PASSWORD: root
       DB_NAME: mydb
       FLASK_ENV: development
+    restart: unless-stopped
 
 volumes:
   db_data:

@@ -13,15 +13,15 @@ const Enrollment: React.FC = () => {
               <tr>
                 <th>ID</th>
                 <th>Description</th>
-                <th>Revenue ($)</th>
+                <th>Total</th>
               </tr>
             </thead>
             <tbody>
               {enrollment.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.id}</td>
+                <tr key={row.activity_id}>
+                  <td>{row.activity_id}</td>
                   <td>{row.description}</td>
-                  <td>{row.total}</td>
+                  <td>{row.total_students}</td>
                 </tr>
               ))}
             </tbody>
