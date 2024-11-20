@@ -3,8 +3,10 @@
 import React from 'react';
 import { useClasses } from '../../contexts/classesContext';
 import './styles.scss';
+import { activityRevenue } from '../../api/views';
 
 const Revenue: React.FC = () => {
+    
     const {revenues} = useClasses();
     return (
         <div className="table-container">
@@ -18,8 +20,8 @@ const Revenue: React.FC = () => {
             </thead>
             <tbody>
               {revenues.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.id}</td>
+                <tr key={row.activity_id}>
+                  <td>{row.activity_id}</td>
                   <td>{row.description}</td>
                   <td>{row.revenue.toLocaleString()}</td>
                 </tr>
