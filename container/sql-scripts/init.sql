@@ -37,7 +37,7 @@ CREATE TABLE `class` (
 );
 
 CREATE TABLE `login` (
-    `mail` VARCHAR(100) NOT NULL,
+    `mail` VARCHAR(100) NOT NULL UNIQUE,
     `password` VARCHAR(128) NOT NULL,
     PRIMARY KEY (`mail`)
 );
@@ -120,6 +120,9 @@ INSERT INTO `class_student` (class_id, student_id, equipment_id) VALUES
         (3, '33333333', 3),
         (4, '44444444', 4),
         (5, '55555555', 5);
+
+INSERT INTO `login` (mail, password) VALUES
+        ("prueba@prueba.com", "prueba");
 
 CREATE VIEW activity_revenue AS
     SELECT 
