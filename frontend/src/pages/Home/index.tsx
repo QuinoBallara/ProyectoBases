@@ -11,9 +11,9 @@ import { getClasses } from '../../api/class';
 
 export const Home = () => {
 
-  const { filters, setFilters, bigFetch,  setAllClasses } = useClasses();
+  const { filters, setFilters, bigFetch, setAllClasses } = useClasses();
 
-  const { isClassModalUp, setIsClassModalUp } = useModal();
+  const { isClassModalUp, setIsClassModalUp, setClassEditMode } = useModal();
 
   const handleFilterChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
@@ -36,7 +36,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       if (!isClassModalUp) {
-          setAllClasses(await getClasses());
+        setAllClasses(await getClasses());
       }
     }
     fetchClasses();
@@ -85,7 +85,10 @@ export const Home = () => {
           <Button
             className="add-class-button"
             label="Add Class"
-            onClick={() => setIsClassModalUp(true)}
+            onClick={() => {
+              setClassEditMode(false);
+              setIsClassModalUp(true)
+            }}
           />
         </div>
         <div className="cards">

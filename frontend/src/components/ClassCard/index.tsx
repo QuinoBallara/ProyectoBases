@@ -9,10 +9,10 @@ import Dropdown from '../DropdownPolenta'
 
 export const ClassCard = (props: ClassProps) => {
 
-  const {setIsClassModalUp, setClassModalData, classModalData} = useModal();
+  const { setIsClassModalUp, setClassModalData, setClassEditMode } = useModal();
 
   const handleEdit = (): void => {
-
+    setClassEditMode(true);
     setClassModalData(props);
     setIsClassModalUp(true);
 

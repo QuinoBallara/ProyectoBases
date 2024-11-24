@@ -9,8 +9,8 @@ import { useClasses } from '../../contexts/classesContext'
 import { getAllEquipment } from '../../api/equipment'
 
 export const EquipmentCard = (props: EquipmentProps) => {
-    const { isEquipmentModalUp, setIsEquipmentModalUp, setEquipmentModalData, equipmentModalData, setEquipmentEditMode } = useModal();
-    const {activities, setEquipments} = useClasses();
+    const { setIsEquipmentModalUp, setEquipmentModalData, setEquipmentEditMode } = useModal();
+    const { activities, setEquipments } = useClasses();
 
     const handleEdit = (): void => {
         setEquipmentEditMode(true);
@@ -22,7 +22,7 @@ export const EquipmentCard = (props: EquipmentProps) => {
     const handleDelete = async () => {
         await deleteEquipment(props.id.toString());
         setEquipments(await getAllEquipment());
-     };
+    };
 
     const activity = activities.find((activity) => activity.id === props.activity_id);
 
