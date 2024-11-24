@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { ClassProps } from '../../consts/classProps';
-import './styles.scss';
-import Button from '../Button';
+import { ClassProps } from '../../consts/classProps'
+
+import './styles.scss'
+import Button from '../Button'
+import { deleteClass, getClasses } from '../../api/class'
 import { useModal } from '../../contexts/modalContext';
 import Dropdown from '../DropdownPolenta';
 import { useClasses } from '../../contexts/classesContext';
@@ -10,7 +12,7 @@ import { addClassStudent, deleteClassStudent, getClassStudentsByClassId } from '
 
 export const ClassCard = (props: ClassProps) => {
   const { setIsClassModalUp, setClassModalData, setClassEditMode } = useModal();
-  const { students, equipments } = useClasses();
+  const { students, equipments, setClasses } = useClasses();
 
   const handleEdit = (): void => {
     setClassEditMode(true);
@@ -50,8 +52,8 @@ export const ClassCard = (props: ClassProps) => {
       .map(student => ({
         value: student.id.toString(),
         label: `${student.first_name} ${student.last_name}`,
-      }));
 
+      }));
     return [{ value: '', label: 'Select a student' }, ...options];
   }, [students, enrolledStudents]);
 
@@ -83,6 +85,7 @@ export const ClassCard = (props: ClassProps) => {
       await deleteClassStudent(props.class_id, selectedDeleteStudent);
       await fetchEnrolledStudents();
       setSelectedDeleteStudent('');
+      setClasses(await getClasses());
     }
   };
 

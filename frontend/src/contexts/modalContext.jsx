@@ -19,11 +19,11 @@ export const ModalProvider = ({ children }) => {
 
     const [classModalData, setClassModalData] = useState({
         activity_description: '',
-        activity_id: '',
+        activity_id: 0,
         dictated: '',
         instructor_first_name: '',
         instructor_id: '',
-        shift_id: '',
+        shift_id: 0,
         shift_name: '',
         student_quotas: '',
     })
@@ -50,16 +50,16 @@ export const ModalProvider = ({ children }) => {
     });
 
     const [activityModalData, setActivityModalData] = useState({
-        descripion: '',
-        cost: '',
-        min_age: '',
-        max_age: '',
+        description: '',
+        cost: 0,
+        min_age: 0,
+        max_age: 0,
     });
 
     const [equipmentModalData, setEquipmentModalData] = useState({
         activity_id: '',
         description: '',
-        cost: '',
+        cost: 0,
     });
 
     const setIsClassModalUp = (condition) => {

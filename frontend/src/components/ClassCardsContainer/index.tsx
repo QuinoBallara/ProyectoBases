@@ -6,12 +6,12 @@ import { ClassProps } from '../../consts/classProps'
 import { ClassCard } from '../ClassCard'
 
 export const ClassCardsContainer = () => {
-  const { classes } = useClasses(); 
+  const { classes } = useClasses();
 
- 
+
   return (
     <div className='container'>
-      {classes.map((card: ClassProps, index: number) => (  
+      {classes.map((card: ClassProps, index: number) => (
         <ClassCard key={index} {...card} />
       ))}
     </div>

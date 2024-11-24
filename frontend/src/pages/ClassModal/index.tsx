@@ -6,7 +6,8 @@ import Input4Number from '../../components/Input4Number';
 import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
 import { instructor } from '../../consts/instructor';
-import { modifyClass } from '../../api/class';
+import { modifyClass, addClass } from '../../api/class';
+import * as validate from '../../utils/validation';
 
 const ClassModal: React.FC = () => {
   const {
@@ -29,10 +30,6 @@ const ClassModal: React.FC = () => {
     }));
   };
 
-  useEffect(() => {
-    console.log(classModalData.instructor);
-  }, [classModalData]);
-
   const closeModal = () => {
     setClassModalData({
       activity_description: '',
@@ -48,13 +45,26 @@ const ClassModal: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    await modifyClass(parseInt(classModalData.class_id), {
-      dictated: Boolean(parseInt(classModalData.dictated)),
+    if (!classEditMode && classModalData.student_quotas === '' && validate.checkInvalidNumber(classModalData.student_quotas)) {
+      alert('Invalid student quotas');
+      return;
+    }
+
+    const data = {
+      dictated: classModalData.dictated === '0' ? false : true,
       instructor_id: classModalData.instructor_id,
       shift_id: parseInt(classModalData.shift_id),
       activity_id: parseInt(classModalData.activity_id),
       student_quotas: parseInt(classModalData.student_quotas),
-    });
+    }
+    console.log('classModalData', classModalData);
+    console.log(data);
+
+    if (!classEditMode) {
+      await addClass(data);
+    } else {
+      await modifyClass(parseInt(classModalData.class_id), data);
+    }
     closeModal();
   };
 
@@ -68,6 +78,17 @@ const ClassModal: React.FC = () => {
             onClick={closeModal}
           />
           <div className="modal-content">
+            {!classEditMode && (<Dropdown
+              label="Dictated"
+              options={[
+                { value: '1', label: 'Yes' },
+                { value: '0', label: 'No' },
+              ]}
+              value={classModalData.dictated}
+              onChange={handleChange}
+              name="dictated"
+            />)}
+
             <Dropdown
               label="Instructor"
               options={instructors.map((instructor: instructor) => {
@@ -103,9 +124,9 @@ const ClassModal: React.FC = () => {
             {!classEditMode && (
               <Input4Number
                 label="Quotas"
-                value={classModalData.quotas}
+                value={classModalData.student_quotas}
                 onChange={handleChange}
-                name="quotas"
+                name="student_quotas"
               />
             )}
           </div>
