@@ -72,54 +72,49 @@ CREATE TABLE `class_student` (
 );
 
 INSERT INTO `shift` (name, start_time, end_time) VALUES
-        ('Mañana', '08:00:00', '12:00:00'),
-        ('Tarde', '14:00:00', '17:00:00'),
-        ('Noche', '17:00:00', '22:00:00');
-
+    ('Morning', '08:00:00', '12:00:00'),
+    ('Evening', '14:00:00', '17:00:00'),
+    ('Night', '17:00:00', '22:00:00');
 
 INSERT INTO `instructor` (id, first_name, last_name) VALUES
-        ('12345678', 'John', 'Doe'),
-        ('87654321', 'Jane', 'Smith'),
-        ('11223344', 'Alice', 'Johnson'),
-        ('22334455', 'Bob', 'Brown'),
-        ('33445566', 'Charlie', 'Davis');
-    
+    ('12345678', 'John', 'Doe'),
+    ('87654321', 'Jane', 'Smith'),
+    ('11223344', 'Alice', 'Johnson'),
+    ('22334455', 'Bob', 'Brown'),
+    ('33445566', 'Charlie', 'Davis');
 
 INSERT INTO `activity` (description, cost, min_age, max_age) VALUES
-        ('Yoga', 100, 18, 60),
-        ('Pilates', 150, 18, 60),
-        ('Crossfit', 200, 18, 60),
-        ('Swimming', 120, 5, 50),
-        ('Cycling', 80, 10, 70);
-
+    ('Snowboarding', 100, 18, 60),
+    ('Skiing', 150, 18, 60),
+    ('Snowmobiling', 200, 18, 60);
 
 INSERT INTO `equipment` (activity_id, description, cost) VALUES
-        (1, 'Yoga Mat', 20),
-        (2, 'Pilates Ball', 30),
-        (3, 'Crossfit Rope', 40),
-        (4, 'Swimming Goggles', 15),
-        (5, 'Cycling Helmet', 25);
+    (1, 'Snow Board', 20),
+    (2, 'Helmet', 30),
+    (3, 'Snowmobile', 40),
+    (1, 'Gloves', 10),
+    (2, 'Boots', 25);
 
 INSERT INTO `student` (id, mail, first_name, last_name, birth_day, phone) VALUES
-        ('11111111', 'student1@mail.com', 'Student', 'One', '2000-01-07', '1234567890'),
-        ('22222222', 'student2@mail.com', 'Student', 'Two', '1999-02-02', '2345678901'),
-        ('33333333', 'student3@mail.com', 'Student', 'Three', '1998-03-03', '3456789012'),
-        ('44444444', 'student4@mail.com', 'Student', 'Four', '1997-04-04', '4567890123'),
-        ('55555555', 'student5@mail.com', 'Student', 'Five', '1996-05-05', '5678901234');
+    ('11111111', 'student1@mail.com', 'Student', 'One', '2000-01-07', '1234567890'),
+    ('22222222', 'student2@mail.com', 'Student', 'Two', '1999-02-02', '2345678901'),
+    ('33333333', 'student3@mail.com', 'Student', 'Three', '1998-03-03', '3456789012'),
+    ('44444444', 'student4@mail.com', 'Student', 'Four', '1997-04-04', '4567890123'),
+    ('55555555', 'student5@mail.com', 'Student', 'Five', '1996-05-05', '5678901234');
 
 INSERT INTO `class` (dictated, instructor_id, shift_id, activity_id, student_quotas) VALUES
-        (1, '12345678', 1, 1, 10),
-        (1, '87654321', 2, 2, 15),
-        (1, '11223344', 3, 3, 20),
-        (1, '22334455', 1, 4, 25),
-        (1, '33445566', 2, 5, 30);
+    (1, '12345678', 1, 1, 10),
+    (1, '87654321', 2, 2, 15),
+    (1, '11223344', 3, 3, 20),
+    (1, '22334455', 1, 1, 25),
+    (1, '33445566', 2, 2, 30);
 
 INSERT INTO `class_student` (class_id, student_id, equipment_id) VALUES
-        (1, '11111111', 1),
-        (2, '22222222', 2),
-        (3, '33333333', 3),
-        (4, '44444444', 4),
-        (5, '55555555', 5);
+    (1, '11111111', 1),
+    (2, '22222222', 2),
+    (3, '33333333', 3),
+    (4, '44444444', 4),
+    (5, '55555555', 5);
 
 INSERT INTO `login` (mail, password) VALUES
         ("prueba@prueba.com", "prueba");
