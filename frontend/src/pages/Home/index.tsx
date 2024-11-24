@@ -7,10 +7,11 @@ import { useClasses } from '../../contexts/classesContext';
 import Button from '../../components/Button';
 import ClassModal from '../ClassModal';
 import { useModal } from '../../contexts/modalContext';
+import { getClasses } from '../../api/class';
 
 export const Home = () => {
 
-  const { filters, setFilters, bigFetch } = useClasses();
+  const { filters, setFilters, bigFetch,  setClasses } = useClasses();
 
   const { isClassModalUp, setIsClassModalUp } = useModal();
 
@@ -32,6 +33,14 @@ export const Home = () => {
     bigFetches();
   }, [])
 
+  useEffect(() => {
+    const fetchClasses = async () => {
+      if (!isClassModalUp) {
+          setClasses(await getClasses());
+      }
+    }
+    fetchClasses();
+  }, [isClassModalUp])
 
   return (
     <div className="homePage">
