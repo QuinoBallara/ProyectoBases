@@ -1,4 +1,4 @@
-# Databases 1 Final Project
+# Databases I Final Project
 
 ## Set Up
 
