@@ -35,7 +35,7 @@ export const Home = () => {
 
   return (
     <div className="homePage">
-      <div className="content">
+      <div className="home-container">
         <div className="filters">
           <Dropdown
             label="Instructor"
