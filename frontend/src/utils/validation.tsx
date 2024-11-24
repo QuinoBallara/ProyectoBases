@@ -3,7 +3,7 @@ export const emailValidation = (email: string) => {
 }
 
 export const phoneValidation = (phone: string) => {
-    return /^\d{10}$/.test(phone);
+    return /^\d{9}$/.test(phone);
 }
 
 export const dateValidation = (date: string) => {
