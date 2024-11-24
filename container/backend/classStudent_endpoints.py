@@ -114,7 +114,7 @@ def get_students_of_a_class_endpoint(class_id):
         return jsonify({"message": "No class students found"}), 404
 
 
-@class_student_bp.route("/class-students/<string:student_id>", methods=["DELETE"])
+@class_student_bp.route("/class-students", methods=["DELETE"])
 def delete_class_student_by_student_id_by_class_id_endpoint():
     data = request.get_json()
 
