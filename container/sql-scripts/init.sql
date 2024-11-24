@@ -184,7 +184,8 @@ CREATE VIEW class_props AS
         s.id AS shift_id,
         s.name AS shift,
         a.id AS activity_id,
-        a.description AS activity
+        a.description AS activity,
+        c.id AS class_id
         FROM
             class c
         JOIN

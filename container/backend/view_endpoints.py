@@ -77,8 +77,12 @@ def showView_class_props():
                 "dictated": result[0],
                 "student_quotas": result[1],
                 "instructor_first_name": result[2],
-                "shift_name": result[3],
-                "activity_description": result[4],
+                "instructor_id": result[3],
+                "shift_id": result[4],
+                "shift_name": result[5],
+                "activity_id": result[6],
+                "activity_description": result[7],
+                "class_id": result[8],
             }
             for result in results[0]
         ]
