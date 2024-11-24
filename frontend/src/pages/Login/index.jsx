@@ -14,13 +14,8 @@ export const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        if (!validate.validateEmail(email)) {
+        if (!validate.emailValidation(email)) {
             alert("Invalid email");
-            return;
-        }
-
-        if (!validate.validatePassword(password)) {
-            alert("Invalid password");
             return;
         }
 

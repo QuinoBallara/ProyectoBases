@@ -18,11 +18,6 @@ export const Register = () => {
             return
         }
 
-        if (!validate.validateName(password)) {
-            alert('Invalid password')
-            return
-        }
-
         fetch('http://localhost:5001/logins', {
             method: 'POST',
             headers: {
