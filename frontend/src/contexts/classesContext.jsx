@@ -115,18 +115,42 @@ export const ClassesProvider = ({ children }) => {
 
     const bigFetch = async () => {
         try {
-            setStudents(await getStudents())
-            setShifts(await getShifts())
-            setInstructors(await getInstructors())
-            setActivities(await getActivities())
-            setEquipments(await getAllEquipment())
-            setClasses(await getClasses())
-            setRevenues(await activityRevenue())
-            setEnrollment(await studentActivity())
-            setAttendance(await shiftClass())
-            setAllClasses(await classProps())
-            console.log('Big fetch done')
+            const [
+                students,
+                shifts,
+                instructors,
+                activities,
+                equipments,
+                classes,
+                revenues,
+                enrollment,
+                attendance,
+                allClasses
+            ] = await Promise.all([
+                getStudents(),
+                getShifts(),
+                getInstructors(),
+                getActivities(),
+                getAllEquipment(),
+                getClasses(),
+                activityRevenue(),
+                studentActivity(),
+                shiftClass(),
+                classProps()
+            ]);
             
+            setStudents(students);
+            setShifts(shifts);
+            setInstructors(instructors);
+            setActivities(activities);
+            setEquipments(equipments);
+            setClasses(classes);
+            setRevenues(revenues);
+            setEnrollment(enrollment);
+            setAttendance(attendance);
+            setAllClasses(allClasses);
+            
+            console.log('Big fetch done');
 
         }
         catch (error) {
