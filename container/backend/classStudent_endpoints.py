@@ -5,6 +5,7 @@ from classStudent import (
     get_class_students,
     get_classes_on_shift_of_student,
     delete_class_student_by_student_id_by_class_id,
+    get_class_student_by_class_id,
 )
 from classes import get_class_by_id
 
@@ -96,7 +97,24 @@ def get_class_students_endpoint():
         return jsonify({"message": "No class students found"}), 404
 
 
-@class_student_bp.route("/class-students/<string:student_id>", methods=["DELETE"])
+@class_student_bp.route("/class-students/<int:class_id>", methods=["GET"])
+def get_students_of_a_class_endpoint(class_id):
+    class_students = get_class_student_by_class_id(class_id)
+    try:
+        class_students = [
+            {
+                "class_id": class_student[0],
+                "student_id": class_student[1],
+                "equipment_id": class_student[2],
+            }
+            for class_student in class_students[0]
+        ]
+        return jsonify(class_students), 200
+    except:
+        return jsonify({"message": "No class students found"}), 404
+
+
+@class_student_bp.route("/class-students", methods=["DELETE"])
 def delete_class_student_by_student_id_by_class_id_endpoint():
     data = request.get_json()
 
