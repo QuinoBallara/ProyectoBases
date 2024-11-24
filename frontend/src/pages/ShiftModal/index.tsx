@@ -7,6 +7,7 @@ import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
 import Input from '../../components/Input';
 import { addShift, modifyShift } from '../../api/shift';
+import * as validate from '../../utils/validation';
 
 const ShiftModal: React.FC = () => {
   const {
@@ -42,9 +43,15 @@ const ShiftModal: React.FC = () => {
 
   const handleSubmit = async () => {
     if (shiftModalData.name === '' || shiftModalData.start_time === '' || shiftModalData.end_time === '') {
-      console.log('Not all fields are filled');
+      alert('Not all fields are filled');
       return;
     }
+
+    if (!validate.validateName(shiftModalData.name)) {
+      alert('Invalid name');
+      return;
+    }
+
     if (!shiftEditMode) {
       await addShift(shiftModalData);
     } else {

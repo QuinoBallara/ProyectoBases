@@ -7,6 +7,7 @@ import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
 import Input from '../../components/Input';
 import { addEquipment, modifyEquipment } from '../../api/equipment';
+import * as validate from '../../utils/validation';
 
 export const EquipmentModal: React.FC = () => {
     const {
@@ -45,16 +46,27 @@ export const EquipmentModal: React.FC = () => {
 
     const handleSubmit = async () => {
         if (equipmentModalData.description === '' || equipmentModalData.activity === '') {
-            console.log('Not all fields are filled');
+            alert('Not all fields are filled');
             return;
-          }
-          if (!equipmentEditMode) {
+        }
+
+        if (!validate.validateDescription(equipmentModalData.description)) {
+            alert('Invalid description');
+            return;
+        }
+
+        if (!validate.checkValidNumber(equipmentModalData.cost)) {
+            alert('Invalid cost');
+            return;
+        }
+
+        if (!equipmentEditMode) {
             await addEquipment(equipmentModalData);
-          } else {
+        } else {
             await modifyEquipment(equipmentModalData.id, equipmentModalData);
-          }
-      
-          closeModal();
+        }
+
+        closeModal();
     };
 
     return (

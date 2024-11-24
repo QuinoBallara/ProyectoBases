@@ -7,7 +7,7 @@ import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
 import Input from '../../components/Input';
 import { addActivity, modifyActivity } from '../../api/activity';
-
+import * as validate from '../../utils/validation';
 const ActivitiesModal: React.FC = () => {
     const {
         isActivityModalUp,
@@ -47,9 +47,35 @@ const ActivitiesModal: React.FC = () => {
             activityModalData.min_age === '' ||
             activityModalData.max_age === ''
         ) {
-            console.log('Not all fields are filled');
+            alert('Not all fields are filled');
             return;
         }
+
+        if (!validate.validateDescription(activityModalData.description)) {
+            alert('Invalid description');
+            return;
+        }
+
+        if (!validate.checkValidNumber(activityModalData.cost)) {
+            alert('Invalid cost');
+            return;
+        }
+
+        if (!validate.validateAge(activityModalData.min_age.toString())) {
+            alert('Invalid min age');
+            return;
+        }
+
+        if (!validate.validateAge(activityModalData.max_age.toString())) {
+            alert('Invalid max age');
+            return;
+        }
+
+        if (activityModalData.min_age > activityModalData.max_age) {
+            alert('Min age is greater than max age');
+            return;
+        }
+
         if (!activityEditMode) {
             await addActivity(activityModalData);
         } else {
