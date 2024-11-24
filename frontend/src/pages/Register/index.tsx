@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/authContext'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
+import * as validate from '../../utils/validation'
 
 export const Register = () => {
     const { register, setIsAuthenticated } = useAuth()
@@ -12,6 +13,16 @@ export const Register = () => {
     const navigate = useNavigate()
 
     const handleRegister = async () => {
+        if (!validate.emailValidation(email)) {
+            alert('Invalid email')
+            return
+        }
+
+        if (!validate.validateName(password)) {
+            alert('Invalid password')
+            return
+        }
+
         fetch('http://localhost:5001/logins', {
             method: 'POST',
             headers: {
