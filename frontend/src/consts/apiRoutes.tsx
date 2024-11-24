@@ -46,6 +46,7 @@ export const API_ROUTES = {
     get: '/class-students',
     add: '/class-students',
     getByClassId: (classId: string) => `/class-students/${classId}`,
+    delete: '/class-students',
   },
   equipment: {
     base: '/equipment',

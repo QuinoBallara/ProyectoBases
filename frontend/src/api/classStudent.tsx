@@ -46,6 +46,18 @@ export async function getClassStudentsByClassId(class_id) {
     return response.json();
 }
 
+export async function deleteClassStudent(class_id, student_id) {
+    const response = await fetch(`${API_URL}${API_ROUTES.class_students.delete}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ class_id, student_id }),
+    })
+    console.log(response);
+    };
+    
+
 export default {
     addClassStudent,
     getClassStudents,

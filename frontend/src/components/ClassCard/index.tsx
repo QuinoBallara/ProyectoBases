@@ -6,7 +6,7 @@ import Button from '../Button';
 import { useModal } from '../../contexts/modalContext';
 import Dropdown from '../DropdownPolenta';
 import { useClasses } from '../../contexts/classesContext';
-import { addClassStudent, getClassStudentsByClassId } from '../../api/classStudent';
+import { addClassStudent, deleteClassStudent, getClassStudentsByClassId } from '../../api/classStudent';
 
 export const ClassCard = (props: ClassProps) => {
   const { setIsClassModalUp, setClassModalData, setClassEditMode } = useModal();
@@ -32,30 +32,39 @@ export const ClassCard = (props: ClassProps) => {
 
   const deleteStudentsOptions = useMemo(() => {
     const enrolledStudentIds = enrolledStudents.map(enrolled => enrolled.student_id);
-    return students
+    const options = students
       .filter(student => enrolledStudentIds.includes(student.id.toString()))
       .map(student => ({
         value: student.id.toString(),
         label: `${student.first_name} ${student.last_name}`,
       }));
+    // Add the default empty option
+    return [{ value: '', label: 'Select a student' }, ...options];
   }, [students, enrolledStudents]);
 
   const addStudentsOptions = useMemo(() => {
     const enrolledStudentIds = enrolledStudents.map(enrolled => enrolled.student_id);
-    return students
+    const options = students
       .filter(student => !enrolledStudentIds.includes(student.id.toString()))
       .map(student => ({
         value: student.id.toString(),
         label: `${student.first_name} ${student.last_name}`,
       }));
+
+    return [{ value: '', label: 'Select a student' }, ...options];
   }, [students, enrolledStudents]);
 
   const addStudent = (): void => {
-    addClassStudent({ class_id: parseInt(props.class_id), student_id: selectedAddStudent, equipment_id: null });
+    if (selectedAddStudent !== '') {
+      addClassStudent({ class_id: parseInt(props.class_id), student_id: selectedAddStudent, equipment_id: null });
+    }
   };
 
   const handleDelete = (): void => {
-    console.log(`Delete student with ID: ${selectedDeleteStudent}`);
+    if (selectedDeleteStudent !== '') {
+      console.log({ class_id: props.class_id, student_id: selectedDeleteStudent });
+      deleteClassStudent(props.class_id, selectedDeleteStudent);
+    }
   };
 
   return (
