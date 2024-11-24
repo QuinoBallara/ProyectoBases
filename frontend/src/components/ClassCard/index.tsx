@@ -23,7 +23,9 @@ export const ClassCard = (props: ClassProps) => {
   };
 
 
-  const [selectedStudent, setSelectedStudent] = useState<string>('None');
+  const [selectedAddStudent, setSelectedAddStudent] = useState<string>('None');
+
+  const [selectedDeleteStudent, setSelectedDeleteStudent] = useState<string>('None');
 
 
   const studentsOptions = useMemo(() => {
@@ -33,7 +35,7 @@ export const ClassCard = (props: ClassProps) => {
   }, [students]);
 
   const addStudent = (): void => {
-    addClassStudent({ class_id: parseInt(props.class_id), student_id: selectedStudent, equipment_id: null });
+    addClassStudent({ class_id: parseInt(props.class_id), student_id: selectedAddStudent, equipment_id: null });
    };
 
 
@@ -53,8 +55,12 @@ export const ClassCard = (props: ClassProps) => {
 
       <div className='cardButtonsContainer'>
         <div className='addStudent-box'>
-          <Dropdown label='Student' value={selectedStudent} onChange={(value) => setSelectedStudent(value.target.value)} name='Add Student' options={studentsOptions} />
+          <Dropdown label='Student' value={selectedAddStudent} onChange={(value) => setSelectedAddStudent(value.target.value)} name='Add Student' options={studentsOptions} />
           <Button label='Add' onClick={() => addStudent()} />
+        </div>
+        <div className='deleteStudent-box'>
+          <Dropdown label='Student' value={selectedDeleteStudent} onChange={(value) => setSelectedDeleteStudent(value.target.value)} name='Delete Student' options={studentsOptions} />
+          <Button label='Delete' onClick={() => addStudent()} />
         </div>
         <Button
           className='edit-button'
