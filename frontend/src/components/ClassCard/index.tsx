@@ -39,7 +39,6 @@ export const ClassCard = (props: ClassProps) => {
         value: student.id.toString(),
         label: `${student.first_name} ${student.last_name}`,
       }));
-    // Add the default empty option
     return [{ value: '', label: 'Select a student' }, ...options];
   }, [students, enrolledStudents]);
 
@@ -58,16 +57,16 @@ export const ClassCard = (props: ClassProps) => {
   const addStudent = async (): Promise<void> => {
     if (selectedAddStudent !== '') {
       await addClassStudent({ class_id: parseInt(props.class_id), student_id: selectedAddStudent, equipment_id: null });
-      await fetchEnrolledStudents(); // Update the list after adding
-      setSelectedAddStudent(''); // Reset the dropdown
+      await fetchEnrolledStudents();
+      setSelectedAddStudent('');
     }
   };
 
   const handleDelete = async (): Promise<void> => {
     if (selectedDeleteStudent !== '') {
       await deleteClassStudent(props.class_id, selectedDeleteStudent);
-      await fetchEnrolledStudents(); // Update the list after deleting
-      setSelectedDeleteStudent(''); // Reset the dropdown
+      await fetchEnrolledStudents();
+      setSelectedDeleteStudent('');
     }
   };
 
