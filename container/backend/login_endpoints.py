@@ -1,7 +1,24 @@
 from flask import Blueprint, jsonify, request
-from login import Login, add_login, get_logins, get_login_by_mail, delete_login
+from cryptography.fernet import Fernet, InvalidToken
+import os
+from login import (
+    Login,
+    get_logins,
+    get_login_by_mail,
+    delete_login,
+    update_login,
+    add_login,
+)
 
 login_bp = Blueprint("login", __name__)
+
+
+key = os.environ.get("FERNET_KEY")
+if key is None:
+    key = Fernet.generate_key().decode()
+    os.environ["FERNET_KEY"] = key
+
+fernet = Fernet(key.encode())
 
 
 def validate_data(data):
@@ -22,13 +39,11 @@ def add_login_endpoint():
     data = request.get_json()
     if isinstance(validate_data(data), str):
         return jsonify({"message": validate_data(data)}), 403
-    login = Login(mail=data["mail"], password=data["password"])
+    login = Login(mail=data["mail"], password=fernet.encrypt(data["password"].encode()))
     result = add_login(login)
     return jsonify({"message": result}), 201
 
 
-# working
-# jsonificado
 @login_bp.route("/logins", methods=["GET"])
 def get_logins_endpoint():
     logins = get_logins()
@@ -52,11 +67,13 @@ def get_login_by_mail_endpoint(mail):
     try:
         formatted_login = {
             "mail": login[0][0][0],
-            "password": login[0][0][1],
+            "password": fernet.decrypt(login[0][0][1]).decode(),
         }
         return jsonify(formatted_login), 200
-    except:
-        return jsonify({"message": "Login not found"}), 404
+    except InvalidToken:
+        return jsonify({"message": "Invalid token", "password": login[0][0][1]}), 400
+    except Exception as e:
+        return jsonify({"message": str(e)}), 404
 
 
 # working
