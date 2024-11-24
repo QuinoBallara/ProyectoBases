@@ -5,6 +5,7 @@ import { useModal } from '../../contexts/modalContext';
 import Input from '../../components/Input';
 import { useClasses } from '../../contexts/classesContext';
 import { addStudent, modifyStudent } from '../../api/student';
+import * as validate from '../../utils/validation';
 
 const StudentModal: React.FC = () => {
   const {
@@ -45,9 +46,40 @@ const StudentModal: React.FC = () => {
 
   const handleSubmit = async () => {
     if ((!studentEditMode && studentModalData.id === '') || studentModalData.first_name === '' || studentModalData.last_name === '' && studentModalData.birth_day === '' && studentModalData.phone === '' && studentModalData.mail === '') {
-      console.log('Not all fields are filled');
+      alert('Not all fields are filled');
       return;
     }
+
+    if (!validate.validateName(studentModalData.first_name)) {
+      alert('Invalid first name');
+      return;
+    }
+
+    if (!validate.validateName(studentModalData.last_name)) {
+      alert('Invalid last name');
+      return;
+    }
+
+    if (!studentEditMode && !validate.idValidation(studentModalData.id)) {
+      alert('Invalid ID');
+      return;
+    }
+
+    if (!validate.dateValidation(studentModalData.birth_day)) {
+      alert('Invalid birth date');
+      return;
+    }
+
+    if (!validate.phoneValidation(studentModalData.phone)) {
+      alert('Invalid phone');
+      return;
+    }
+
+    if (!validate.emailValidation(studentModalData.mail)) {
+      alert('Invalid email');
+      return;
+    }
+
     if (!studentEditMode) {
       await addStudent(studentModalData);
     } else {

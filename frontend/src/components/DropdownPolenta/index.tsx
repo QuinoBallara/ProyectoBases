@@ -34,7 +34,7 @@ const Dropdown: FC<DropdownProps> = ({
                     onChange={handleChange}
                     name={name}
                 >
-                    <option value="" disabled>{`Select ${label}`}</option>
+
                     {options.map((option) => (
                         <option key={option.value} value={option.value}>
                             {option.label}

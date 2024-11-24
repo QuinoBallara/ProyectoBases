@@ -7,6 +7,7 @@ import { useModal } from '../../contexts/modalContext';
 import { useClasses } from '../../contexts/classesContext';
 import Input from '../../components/Input';
 import { addInstructor, modifyInstructor } from '../../api/instructor';
+import * as validate from '../../utils/validation';
 
 const InstructorModal: React.FC = () => {
   const {
@@ -45,9 +46,25 @@ const InstructorModal: React.FC = () => {
 
   const handleSubmit = async () => {
     if ((!instructorEditMode && instructorModalData.id === '') || instructorModalData.first_name === '' || instructorModalData.last_name === '') {
-      console.log('Not all fields are filled');
+      alert('Not all fields are filled');
       return;
     }
+
+    if (!validate.validateName(instructorModalData.first_name)) {
+      alert('Invalid first name');
+      return;
+    }
+
+    if (!validate.validateName(instructorModalData.last_name)) {
+      alert('Invalid last name');
+      return;
+    }
+
+    if (!instructorEditMode && !validate.idValidation(instructorModalData.id)) {
+      alert('Invalid ID');
+      return;
+    }
+
     if (!instructorEditMode) {
       await addInstructor(instructorModalData);
     } else {
