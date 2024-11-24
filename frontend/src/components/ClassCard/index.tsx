@@ -22,11 +22,12 @@ export const ClassCard = (props: ClassProps) => {
   const [selectedDeleteStudent, setSelectedDeleteStudent] = useState<string>('None');
   const [enrolledStudents, setEnrolledStudents] = useState<{ class_id: string; equipment_id: string | null; student_id: string }[]>([]);
 
+  const fetchEnrolledStudents = async () => {
+    const data = await getClassStudentsByClassId(props.class_id);
+    setEnrolledStudents(data);
+  };
+
   useEffect(() => {
-    const fetchEnrolledStudents = async () => {
-      const data = await getClassStudentsByClassId(props.class_id);
-      setEnrolledStudents(data);
-    };
     fetchEnrolledStudents();
   }, [props.class_id]);
 
@@ -54,16 +55,19 @@ export const ClassCard = (props: ClassProps) => {
     return [{ value: '', label: 'Select a student' }, ...options];
   }, [students, enrolledStudents]);
 
-  const addStudent = (): void => {
+  const addStudent = async (): Promise<void> => {
     if (selectedAddStudent !== '') {
-      addClassStudent({ class_id: parseInt(props.class_id), student_id: selectedAddStudent, equipment_id: null });
+      await addClassStudent({ class_id: parseInt(props.class_id), student_id: selectedAddStudent, equipment_id: null });
+      await fetchEnrolledStudents(); // Update the list after adding
+      setSelectedAddStudent(''); // Reset the dropdown
     }
   };
 
-  const handleDelete = (): void => {
+  const handleDelete = async (): Promise<void> => {
     if (selectedDeleteStudent !== '') {
-      console.log({ class_id: props.class_id, student_id: selectedDeleteStudent });
-      deleteClassStudent(props.class_id, selectedDeleteStudent);
+      await deleteClassStudent(props.class_id, selectedDeleteStudent);
+      await fetchEnrolledStudents(); // Update the list after deleting
+      setSelectedDeleteStudent(''); // Reset the dropdown
     }
   };
 
