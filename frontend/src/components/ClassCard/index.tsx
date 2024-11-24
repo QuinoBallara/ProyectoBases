@@ -6,10 +6,14 @@ import './styles.scss'
 import Button from '../Button'
 import { useModal } from '../../contexts/modalContext'
 import Dropdown from '../DropdownPolenta'
+import { useClasses } from '../../contexts/classesContext'
+import { addClassStudent } from '../../api/classStudent'
 
 export const ClassCard = (props: ClassProps) => {
-
+  
   const { setIsClassModalUp, setClassModalData, setClassEditMode } = useModal();
+
+  const {students} = useClasses();
 
   const handleEdit = (): void => {
     setClassEditMode(true);
@@ -20,17 +24,7 @@ export const ClassCard = (props: ClassProps) => {
 
 
   const [selectedStudent, setSelectedStudent] = useState<string>('None');
-  const [students, setStudents] = useState([
-    {
-      id: 1, mail: 'student1@mail.com', first_name: 'Student', last_name: '1', birth_date: '1990-01-01', phone: '123456789',
-    },
-    {
-      id: 2, mail: 'student2@mail.com', first_name: 'Student', last_name: '2', birth_date: '1990-01-01', phone: '123456789',
-    },
-    {
-      id: 3, mail: 'student3@mail.com', first_name: 'Student', last_name: '3', birth_date: '1990-01-01', phone: '123456789',
-    },
-  ]);
+
 
   const studentsOptions = useMemo(() => {
     let list = students.map(student => ({ value: student.id.toString(), label: `${student.first_name} ${student.last_name}` }))
@@ -38,7 +32,9 @@ export const ClassCard = (props: ClassProps) => {
     return list;
   }, [students]);
 
-  const addStudent = (): void => { };
+  const addStudent = (): void => {
+    addClassStudent({ class_id: parseInt(props.class_id), student_id: selectedStudent, equipment_id: null });
+   };
 
 
   const handleDelete = (): void => { };
