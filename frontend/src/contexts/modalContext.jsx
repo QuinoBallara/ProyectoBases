@@ -18,10 +18,14 @@ export const ModalProvider = ({ children }) => {
     const [equipmentEditMode, setEquipmentEditMode] = useState(true);
 
     const [classModalData, setClassModalData] = useState({
-        instructor: 'any',
-        shift: 'any',
-        activity: 'any',
-        quotas: 1,
+        activity_description: '',
+        activity_id: '',
+        dictated: '',
+        instructor_first_name: '',
+        instructor_id: '',
+        shift_id: '',
+        shift_name: '',
+        student_quotas: '',
     })
 
     const [instructorModalData, setInstructorModalData] = useState({

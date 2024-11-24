@@ -159,7 +159,7 @@ export const ClassesProvider = ({ children }) => {
     }
 
     return (
-        <ClassesContext.Provider value={{ classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments, bigFetch }}>
+        <ClassesContext.Provider value={{ allClasses, setAllClasses, classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments, bigFetch }}>
             {children}
         </ClassesContext.Provider>
     );

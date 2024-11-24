@@ -7,12 +7,13 @@ import { useClasses } from '../../contexts/classesContext';
 import Button from '../../components/Button';
 import ClassModal from '../ClassModal';
 import { useModal } from '../../contexts/modalContext';
+import { getClasses } from '../../api/class';
 
 export const Home = () => {
 
-  const { filters, setFilters, bigFetch } = useClasses();
+  const { filters, setFilters, bigFetch, setAllClasses } = useClasses();
 
-  const { isClassModalUp, setIsClassModalUp } = useModal();
+  const { isClassModalUp, setIsClassModalUp, setClassEditMode } = useModal();
 
   const handleFilterChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
@@ -32,6 +33,14 @@ export const Home = () => {
     bigFetches();
   }, [])
 
+  useEffect(() => {
+    const fetchClasses = async () => {
+      if (!isClassModalUp) {
+        setAllClasses(await getClasses());
+      }
+    }
+    fetchClasses();
+  }, [isClassModalUp])
 
   return (
     <div className="homePage">
@@ -76,7 +85,10 @@ export const Home = () => {
           <Button
             className="add-class-button"
             label="Add Class"
-            onClick={() => setIsClassModalUp(true)}
+            onClick={() => {
+              setClassEditMode(false);
+              setIsClassModalUp(true)
+            }}
           />
         </div>
         <div className="cards">

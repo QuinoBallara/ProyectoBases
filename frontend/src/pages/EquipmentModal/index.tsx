@@ -16,7 +16,6 @@ export const EquipmentModal: React.FC = () => {
         equipmentModalData,
         setEquipmentModalData,
         equipmentEditMode,
-        setEquipmentEditMode,
     } = useModal();
 
     const { activities } = useClasses();
