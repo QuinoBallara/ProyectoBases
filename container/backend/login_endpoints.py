@@ -4,10 +4,24 @@ from login import Login, add_login, get_logins, get_login_by_mail, delete_login
 login_bp = Blueprint("login", __name__)
 
 
+def validate_data(data):
+    if not data["mail"]:
+        return "mail is required"
+    if not isinstance(data["mail"], str):
+        return "mail must be a string"
+    if not data["password"]:
+        return "password is required"
+    if not isinstance(data["password"], str):
+        return "password must be a string"
+    return True
+
+
 # working
 @login_bp.route("/logins", methods=["POST"])
 def add_login_endpoint():
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     login = Login(mail=data["mail"], password=data["password"])
     result = add_login(login)
     return jsonify({"message": result}), 201
@@ -49,4 +63,14 @@ def get_login_by_mail_endpoint(mail):
 @login_bp.route("/logins/<string:mail>", methods=["DELETE"])
 def delete_login_endpoint(mail):
     result = delete_login(mail)
+    return jsonify({"message": result}), 200
+
+
+@login_bp.route("/logins/<string:mail>", methods=["PUT"])
+def update_login_endpoint(mail):
+    data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
+    login = Login(mail=mail, password=data["password"])
+    result = update_login(login)
     return jsonify({"message": result}), 200

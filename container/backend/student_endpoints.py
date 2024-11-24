@@ -12,10 +12,42 @@ import datetime
 student_bp = Blueprint("student", __name__)
 
 
+def validate_data(data):
+    if not data["id"]:
+        return "id is required"
+    if not isinstance(data["id"], str):
+        return "id must be a string"
+    elif not len(data["id"]) == 8:
+        return "id must be 8 characters long"
+    if not data["mail"]:
+        return "mail is required"
+    if not isinstance(data["mail"], str):
+        return "mail must be a string"
+    if not data["first_name"]:
+        return "first_name is required"
+    if not isinstance(data["first_name"], str):
+        return "first_name must be a string"
+    if not data["last_name"]:
+        return "last_name is required"
+    if not isinstance(data["last_name"], str):
+        return "last_name must be a string"
+    if not data["birth_day"]:
+        return "birth_day is required"
+    if not isinstance(data["birth_day"], str):
+        return "birth_day must be a string"
+    if not data["phone"]:
+        return "phone is required"
+    if not isinstance(data["phone"], str):
+        return "phone must be a string"
+    return True
+
+
 # working
 @student_bp.route("/students", methods=["POST"])
 def add_student_endpoint():
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     student = Student(
         id=data["id"],
         mail=data["mail"],
@@ -73,6 +105,8 @@ def get_student_by_id_endpoint(student_id):
 @student_bp.route("/students/<string:student_id>", methods=["PUT"])
 def modify_student_endpoint(student_id):
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     student = Student(
         id=data["id"],
         mail=data["mail"],

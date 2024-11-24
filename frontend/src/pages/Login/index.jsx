@@ -13,8 +13,26 @@ export const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        setIsAuthenticated(true);
-        navigate("/");
+        fetch("http://localhost:5001/logins/" + email, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(response => response.json())
+            .then(data => {
+                if (data.password === password) {
+                    setAuthData({ email: email, password: password })
+                    setIsAuthenticated(true);
+                    navigate("/");
+                }
+                else {
+                    alert("Invalid email or password");
+                }
+            }
+            ).catch(error => {
+                console.error('Error:', error);
+                alert("Error:" + error);
+            });
     };
 
     return (

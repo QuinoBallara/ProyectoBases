@@ -12,10 +12,27 @@ from equipment import (
 equipment_bp = Blueprint("equipment", __name__)
 
 
+def validate_data(data):
+    if not data["activity_id"]:
+        return "activity_id is required"
+    if not isinstance(data["activity_id"], int):
+        return "activity_id must be an integer"
+    if data["description"]:
+        if not isinstance(data["description"], str):
+            return "description must be a string"
+    if not data["cost"]:
+        return "cost is required"
+    if not isinstance(data["cost"], int):
+        return "cost must be an int"
+    return True
+
+
 # working
 @equipment_bp.route("/equipment", methods=["POST"])
 def add_equipment_endpoint():
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     equipment = Equipment(
         activity_id=data["activity_id"],
         description=data["description"],
@@ -90,6 +107,8 @@ def get_equipment_by_id_endpoint(id):
 @equipment_bp.route("/equipment/<int:id>", methods=["PUT"])
 def modify_equipment_endpoint(id):
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     equipment = Equipment(
         activity_id=data["activity_id"],
         description=data["description"],

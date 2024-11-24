@@ -15,10 +15,38 @@ import pytz
 class_bp = Blueprint("class", __name__)
 
 
+def validate_data(data):
+    if not data["dictated"]:
+        return "dictated is required"
+    if not isinstance(data["dictated"], bool):
+        return "dictated must be a boolean"
+    if not data["instructor_id"]:
+        return "instructor_id is required"
+    if not isinstance(data["instructor_id"], str):
+        return "instructor_id must be an string"
+    elif not len(data["instructor_id"]) == 8:
+        return "instructor_id must be 8 characters long"
+    if not data["shift_id"]:
+        return "shift_id is required"
+    if not isinstance(data["shift_id"], int):
+        return "shift_id must be an integer"
+    if not data["activity_id"]:
+        return "activity_id is required"
+    if not isinstance(data["activity_id"], int):
+        return "activity_id must be an integer"
+    if not data["student_quotas"]:
+        return "student_quotas is required"
+    if not isinstance(data["student_quotas"], int):
+        return "student_quotas must be an integer"
+    return True
+
+
 # working
 @class_bp.route("/classes", methods=["POST"])
 def add_class_endpoint():
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
     class_obj = Class(
         dictated=data["dictated"],
         instructor_id=data["instructor_id"],
@@ -78,6 +106,8 @@ def modify_class_endpoint(class_id):
     if is_class_in_session(class_obj[0][0][3]):
         return jsonify({"message": "Class is in session"}), 403
     data = request.get_json()
+    if isinstance(validate_data(data), str):
+        return jsonify({"message": validate_data(data)}), 403
 
     class_obj = Class(
         dictated=data["dictated"],

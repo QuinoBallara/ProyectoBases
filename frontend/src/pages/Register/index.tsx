@@ -12,8 +12,21 @@ export const Register = () => {
     const navigate = useNavigate()
 
     const handleRegister = async () => {
-        setIsAuthenticated(true);
-        navigate('/');
+        fetch('http://localhost:5001/logins', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                mail: email,
+                password: password
+            })
+        }).then(response => response.json())
+            .then(() => { navigate('/login') })
+            .catch(error => {
+                console.error('Error:', error)
+                alert("Error: " + error)
+            })
     };
 
     return (
