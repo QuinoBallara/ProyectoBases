@@ -1,6 +1,7 @@
 import { API_URL, API_ROUTES } from '../consts/apiRoutes';
 
 export async function addClassStudent(classStudent) {
+    console.log(classStudent);
     const response = await fetch(`${API_URL}${API_ROUTES.class_students.add}`, {
         method: 'POST',
         headers: {
