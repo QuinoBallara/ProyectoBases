@@ -11,7 +11,7 @@ import { getClasses } from '../../api/class';
 
 export const Home = () => {
 
-  const { filters, setFilters, bigFetch,  setClasses } = useClasses();
+  const { filters, setFilters, bigFetch,  setAllClasses } = useClasses();
 
   const { isClassModalUp, setIsClassModalUp } = useModal();
 
@@ -36,7 +36,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       if (!isClassModalUp) {
-          setClasses(await getClasses());
+          setAllClasses(await getClasses());
       }
     }
     fetchClasses();
