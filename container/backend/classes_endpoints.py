@@ -16,7 +16,7 @@ class_bp = Blueprint("class", __name__)
 
 
 def validate_data(data):
-    if not data["dictated"]:
+    if "dictated" not in data:
         return "dictated is required"
     if not isinstance(data["dictated"], bool):
         return "dictated must be a boolean"

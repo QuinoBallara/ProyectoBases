@@ -56,7 +56,7 @@ const ActivitiesModal: React.FC = () => {
             return;
         }
 
-        if (!validate.checkValidNumber(activityModalData.cost)) {
+        if (validate.checkInvalidNumber(activityModalData.cost)) {
             alert('Invalid cost');
             return;
         }
@@ -76,10 +76,18 @@ const ActivitiesModal: React.FC = () => {
             return;
         }
 
+        const data = {
+            description: activityModalData.description,
+            cost: parseInt(activityModalData.cost),
+            min_age: parseInt(activityModalData.min_age),
+            max_age: parseInt(activityModalData.max_age),
+        }
+
         if (!activityEditMode) {
-            await addActivity(activityModalData);
+            console.log(data)
+            await addActivity(data);
         } else {
-            await modifyActivity(activityModalData.id, activityModalData);
+            await modifyActivity(activityModalData.id, data);
         }
 
         closeModal();

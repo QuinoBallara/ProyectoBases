@@ -46,7 +46,7 @@ export const EquipmentModal: React.FC = () => {
     };
 
     const handleSubmit = async () => {
-        if (equipmentModalData.description === '' || equipmentModalData.activity === '') {
+        if (equipmentModalData.description === '') {
             alert('Not all fields are filled');
             return;
         }
@@ -56,15 +56,22 @@ export const EquipmentModal: React.FC = () => {
             return;
         }
 
-        if (!validate.checkValidNumber(equipmentModalData.cost)) {
+        if (validate.checkInvalidNumber(equipmentModalData.cost)) {
             alert('Invalid cost');
             return;
         }
+        console.log('equipmentModalData', equipmentModalData);
+        const data = {
+            activity_id: parseInt(equipmentModalData.activity_id),
+            description: equipmentModalData.description,
+            cost: parseInt(equipmentModalData.cost),
+        }
 
         if (!equipmentEditMode) {
-            await addEquipment(equipmentModalData);
+            console.log('equipmentModalData', data);
+            await addEquipment(data);
         } else {
-            await modifyEquipment(equipmentModalData.id, equipmentModalData);
+            await modifyEquipment(equipmentModalData.id, data);
         }
 
         closeModal();

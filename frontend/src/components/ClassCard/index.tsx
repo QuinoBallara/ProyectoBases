@@ -6,10 +6,13 @@ import './styles.scss'
 import Button from '../Button'
 import { useModal } from '../../contexts/modalContext'
 import Dropdown from '../DropdownPolenta'
+import { deleteClass, getClasses } from '../../api/class'
+import { useClasses } from '../../contexts/classesContext'
 
 export const ClassCard = (props: ClassProps) => {
 
   const { setIsClassModalUp, setClassModalData, setClassEditMode } = useModal();
+  const { setClasses } = useClasses();
 
   const handleEdit = (): void => {
     setClassEditMode(true);
@@ -41,7 +44,11 @@ export const ClassCard = (props: ClassProps) => {
   const addStudent = (): void => { };
 
 
-  const handleDelete = (): void => { };
+  const handleDelete = async () => {
+    await deleteClass(props.class_id.toString());
+    console.log('Deleted class with id: ' + props.class_id);
+    setClasses(await getClasses());
+  };
 
 
   return (

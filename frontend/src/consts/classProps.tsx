@@ -1,4 +1,5 @@
 export type ClassProps = {
+  class_id: string,
   activity_description: string,
   activity_id: string,
   dictated: string,

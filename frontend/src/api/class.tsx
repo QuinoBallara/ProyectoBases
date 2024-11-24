@@ -1,18 +1,7 @@
 import { API_URL, API_ROUTES } from '../consts/apiRoutes';
 
-async function addActivity(activity) {
-    const response = await fetch(`${API_URL}${API_ROUTES.activities.add}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(activity),
-    });
-    const data = await response.json();
-    return data;
-}
-
 async function addClass(data) {
+
     const response = await fetch(`${API_URL}${API_ROUTES.classes.add}`, {
         method: 'POST',
         headers: {
@@ -71,7 +60,6 @@ async function deleteClass(classId) {
 }
 
 export {
-    addActivity,
     addClass,
     getClasses,
     getClassById,

@@ -14,8 +14,8 @@ export const idValidation = (id: string) => {
     return /^\d{5,8}$/.test(id);
 }
 
-export const checkValidNumber = (num: number) => {
-    return num >= 0;
+export const checkInvalidNumber = (num: number) => {
+    return num <= 0;
 }
 
 export const validateAge = (age: string) => {
