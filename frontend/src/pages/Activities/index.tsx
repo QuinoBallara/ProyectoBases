@@ -29,7 +29,7 @@ export const Activities = () => {
                     setIsActivityModalUp(true)
                 }}
             />
-            <div className='content'>
+            <div className='activity-content'>
                 <div className='cards'>
                     <ActivityCardsContainer />
                 </div>
