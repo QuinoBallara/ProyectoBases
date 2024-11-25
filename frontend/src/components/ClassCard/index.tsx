@@ -12,7 +12,7 @@ import { addClassStudent, deleteClassStudent, getClassStudentsByClassId } from '
 
 export const ClassCard = (props: ClassProps) => {
   const { setIsClassModalUp, setClassModalData, setClassEditMode } = useModal();
-  const { students, equipments, setClasses } = useClasses();
+  const { students, equipments, setClasses, activities } = useClasses();
 
   const handleEdit = (): void => {
     setClassEditMode(true);
@@ -75,14 +75,27 @@ export const ClassCard = (props: ClassProps) => {
 
   const addStudent = async (): Promise<void> => {
     if (selectedAddStudent !== '') {
-      await addClassStudent({
-        class_id: parseInt(props.class_id),
-        student_id: selectedAddStudent,
-        equipment_id: selectedEquipment === '' ? null : parseInt(selectedEquipment),
-      });
-      await fetchEnrolledStudents();
-      setSelectedAddStudent('');
-      setSelectedEquipment('');
+      let activity = activities.find(activity => activity.id === props.activity_id);
+      let student = students.find(student => student.id === parseInt(selectedAddStudent));
+
+      if (activity && student) {
+        const studentAge = new Date().getFullYear() - new Date(student.birth_day).getFullYear();
+        if (studentAge < activity.min_age || studentAge > activity.max_age) {
+          alert(`Student does not meet the age requirements for this activity. Age should be between ${activity.min_age} and ${activity.max_age}.`);
+          return;
+        }
+      }
+
+      {
+        await addClassStudent({
+          class_id: parseInt(props.class_id),
+          student_id: selectedAddStudent,
+          equipment_id: selectedEquipment === '' ? null : parseInt(selectedEquipment),
+        });
+        await fetchEnrolledStudents();
+        setSelectedAddStudent('');
+        setSelectedEquipment('');
+      }
     }
   };
 
