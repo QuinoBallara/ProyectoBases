@@ -43,6 +43,11 @@ async function modifyClass(classId, data) {
         },
         body: JSON.stringify(data),
     });
+
+        alert("You don't have permission to modify this class");
+        return;
+    }
+
     const result = await response.json();
     if (result.message[0].startsWith("Error executing statement")) {
         alert('Instructor is likely already teaching a class in the same shift');
