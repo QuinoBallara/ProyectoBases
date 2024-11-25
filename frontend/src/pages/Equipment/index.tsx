@@ -9,7 +9,7 @@ import { useClasses } from '../../contexts/classesContext'
 
 export const Equipment = () => {
     const { setIsEquipmentModalUp, setEquipmentEditMode, isEquipmentModalUp } = useModal();
-    const {setEquipments} = useClasses();
+    const { setEquipments } = useClasses();
 
     useEffect(() => {
         const fetchEquipment = async () => {

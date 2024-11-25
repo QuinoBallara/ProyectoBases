@@ -113,53 +113,56 @@ export const ClassesProvider = ({ children }) => {
         setClasses(filteredClasses);
     }, [filters, allClasses]);
 
-    const bigFetch = async () => {
-        try {
-            const [
-                students,
-                shifts,
-                instructors,
-                activities,
-                equipments,
-                classes,
-                revenues,
-                enrollment,
-                attendance,
-                allClasses
-            ] = await Promise.all([
-                getStudents(),
-                getShifts(),
-                getInstructors(),
-                getActivities(),
-                getAllEquipment(),
-                getClasses(),
-                activityRevenue(),
-                studentActivity(),
-                shiftClass(),
-                classProps()
-            ]);
-            
-            setStudents(students);
-            setShifts(shifts);
-            setInstructors(instructors);
-            setActivities(activities);
-            setEquipments(equipments);
-            setClasses(classes);
-            setRevenues(revenues);
-            setEnrollment(enrollment);
-            setAttendance(attendance);
-            setAllClasses(allClasses);
-            
-            console.log('Big fetch done');
+    useEffect(() => {
+        const bigFetch = async () => {
+            try {
+                const [
+                    students,
+                    shifts,
+                    instructors,
+                    activities,
+                    equipments,
+                    classes,
+                    revenues,
+                    enrollment,
+                    attendance,
+                    allClasses
+                ] = await Promise.all([
+                    getStudents(),
+                    getShifts(),
+                    getInstructors(),
+                    getActivities(),
+                    getAllEquipment(),
+                    getClasses(),
+                    activityRevenue(),
+                    studentActivity(),
+                    shiftClass(),
+                    classProps()
+                ]);
 
+                setStudents(students);
+                setShifts(shifts);
+                setInstructors(instructors);
+                setActivities(activities);
+                setEquipments(equipments);
+                setClasses(classes);
+                setRevenues(revenues);
+                setEnrollment(enrollment);
+                setAttendance(attendance);
+                setAllClasses(allClasses);
+
+                console.log('Big fetch done');
+
+            }
+            catch (error) {
+                console.log(error)
+            }
         }
-        catch (error) {
-            console.log(error)
-        }
-    }
+        bigFetch();
+    }, []);
 
     return (
-        <ClassesContext.Provider value={{ allClasses, setAllClasses, classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments, bigFetch }}>
+        <ClassesContext.Provider value={{ allClasses, setAllClasses, classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments }}>
             {children}
         </ClassesContext.Provider>
     );
