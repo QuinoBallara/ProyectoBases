@@ -21,7 +21,6 @@ export const ShiftCard = (props: shift) => {
 
   const handleDelete = async () => {
     await deleteShift(props.id.toString());
-    console.log('Deleted shift with id: ' + props.id);
     setShifts(await getShifts());
   };
 

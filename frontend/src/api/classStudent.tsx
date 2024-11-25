@@ -1,7 +1,6 @@
 import { API_URL, API_ROUTES } from '../consts/apiRoutes';
 
 export async function addClassStudent(classStudent) {
-    console.log(classStudent);
     const response = await fetch(`${API_URL}${API_ROUTES.class_students.add}`, {
         method: 'POST',
         headers: {
@@ -11,6 +10,7 @@ export async function addClassStudent(classStudent) {
     });
 
     if (!response.ok) {
+        alert('Student is likely already enrolled in a class in the same shift')
         throw new Error('Failed to add class student');
     }
 
@@ -55,9 +55,8 @@ export async function deleteClassStudent(class_id, student_id) {
         },
         body: JSON.stringify({ class_id, student_id }),
     })
-    console.log(response);
-    };
-    
+};
+
 
 export default {
     addClassStudent,
