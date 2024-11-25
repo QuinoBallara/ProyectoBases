@@ -6,9 +6,9 @@ import './styles.scss';
 const Enrollment: React.FC = () => {
   const { enrollment } = useClasses();
 
+
   const maxStudents = Math.max(...enrollment.map(row => row.total_students));
 
-  // Transform data for the chart
   const chartData = enrollment.map(row => ({
     id: row.activity_id,
     description: row.description,

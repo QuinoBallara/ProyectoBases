@@ -11,7 +11,7 @@ import { getClasses } from '../../api/class';
 
 export const Home = () => {
 
-  const { filters, setFilters, bigFetch, setAllClasses, instructors, shifts, activities } = useClasses();
+  const { filters, setFilters, setAllClasses, instructors, shifts, activities } = useClasses();
 
   const { isClassModalUp, setIsClassModalUp, setClassEditMode } = useModal();
 
@@ -24,14 +24,6 @@ export const Home = () => {
       [filterName]: e.target.value,
     }));
   };
-
-  useEffect(() => {
-    const bigFetches = async () => {
-      await bigFetch();
-      console.log('big fetch');
-    }
-    bigFetches();
-  }, [])
 
   useEffect(() => {
     const fetchClasses = async () => {

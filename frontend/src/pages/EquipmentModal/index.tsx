@@ -60,7 +60,6 @@ export const EquipmentModal: React.FC = () => {
             alert('Invalid cost');
             return;
         }
-        console.log('equipmentModalData', equipmentModalData);
         const data = {
             activity_id: parseInt(equipmentModalData.activity_id),
             description: equipmentModalData.description,
@@ -68,7 +67,6 @@ export const EquipmentModal: React.FC = () => {
         }
 
         if (!equipmentEditMode) {
-            console.log('equipmentModalData', data);
             await addEquipment(data);
         } else {
             await modifyEquipment(equipmentModalData.id, data);

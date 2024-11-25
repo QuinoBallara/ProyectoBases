@@ -21,7 +21,6 @@ export const StudentCard = (props: student) => {
 
   const handleDelete = async () => {
     await deleteStudent(props.id.toString());
-    console.log('Deleted student with id: ' + props.id);
     setStudents(await getStudents());
   };
 

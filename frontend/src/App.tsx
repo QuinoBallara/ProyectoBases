@@ -19,7 +19,6 @@ import { Equipment } from './pages/Equipment';
 
 export const App = () => {
     const { isAuthenticated } = useAuth();
-    console.log(isAuthenticated);
 
 
 

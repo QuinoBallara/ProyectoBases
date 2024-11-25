@@ -57,8 +57,6 @@ const ClassModal: React.FC = () => {
       activity_id: parseInt(classModalData.activity_id),
       student_quotas: parseInt(classModalData.student_quotas),
     }
-    console.log('classModalData', classModalData);
-    console.log(data);
 
     if (!classEditMode) {
       await addClass(data);

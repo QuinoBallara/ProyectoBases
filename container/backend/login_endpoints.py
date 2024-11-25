@@ -61,15 +61,23 @@ def get_logins_endpoint():
 
 
 # working
-@login_bp.route("/logins/<string:mail>", methods=["GET"])
-def get_login_by_mail_endpoint(mail):
+@login_bp.route("/logins/isRegistered", methods=["GET"])
+def get_login_by_mail_endpoint():
+
+    mail = request.args.get("mail")
+    password = request.args.get("password")
+
     login = get_login_by_mail(mail)
+    # return jsonify(login), 200
     try:
-        formatted_login = {
-            "mail": login[0][0][0],
-            "password": fernet.decrypt(login[0][0][1]).decode(),
-        }
-        return jsonify(formatted_login), 200
+        # formatted_login = {
+        #     "mail": login[0][0][0],
+        #     "password": fernet.decrypt(login[0][0][1]).decode(),
+        # }
+        if fernet.decrypt(login[0][0][1]).decode() == password:
+            return jsonify({"isRegistered": True}), 200
+        else:
+            return jsonify({"message": "Invalid password"}), 400
     except InvalidToken:
         return jsonify({"message": "Invalid token", "password": login[0][0][1]}), 400
     except Exception as e:

@@ -39,78 +39,78 @@ export const ClassesProvider = ({ children }) => {
     const [attendance, setAttendance] = useState([]);
 
     useEffect(() => {
-       
-    const filteredClasses = allClasses.filter((classItem) => {
-        console.log('classItem', classItem);
-        const instructorName = instructors.find(
-            (inst) => inst.id.toString() === filters.instructor
-        )?.first_name;
 
-        const shiftName = shifts.find(
-            (shift) => shift.id.toString() === filters.shift
-        )?.name.toLowerCase();
+        const filteredClasses = allClasses.filter((classItem) => {
+            const instructorName = instructors.find(
+                (inst) => inst.id.toString() === filters.instructor
+            )?.first_name;
 
-        const activityName = activities.find(
-            (activity) => activity.id.toString() === filters.activity
-        )?.description.toLowerCase();
+            const shiftName = shifts.find(
+                (shift) => shift.id.toString() === filters.shift
+            )?.name.toLowerCase();
 
-        return (
-            (filters.instructor === "any" || classItem.instructor_first_name.includes(instructorName)) &&
-            (filters.shift === "any" || classItem.shift_name.toLowerCase() === shiftName) &&
-            (filters.activity === "any" || classItem.activity_description.toLowerCase() === activityName)
-        );
-    });
-    setClasses(filteredClasses);
-}, [filters, allClasses, instructors, shifts, activities]);
+            const activityName = activities.find(
+                (activity) => activity.id.toString() === filters.activity
+            )?.description.toLowerCase();
+
+            return (
+                (filters.instructor === "any" || classItem.instructor_first_name.includes(instructorName)) &&
+                (filters.shift === "any" || classItem.shift_name.toLowerCase() === shiftName) &&
+                (filters.activity === "any" || classItem.activity_description.toLowerCase() === activityName)
+            );
+        });
+        setClasses(filteredClasses);
+    }, [filters, allClasses, instructors, shifts, activities]);
 
 
-    const bigFetch = async () => {
-        try {
-            const [
-                students,
-                shifts,
-                instructors,
-                activities,
-                equipments,
-                classes,
-                revenues,
-                enrollment,
-                attendance,
-                allClasses
-            ] = await Promise.all([
-                getStudents(),
-                getShifts(),
-                getInstructors(),
-                getActivities(),
-                getAllEquipment(),
-                getClasses(),
-                activityRevenue(),
-                studentActivity(),
-                shiftClass(),
-                classProps()
-            ]);
-            
-            setStudents(students);
-            setShifts(shifts);
-            setInstructors(instructors);
-            setActivities(activities);
-            setEquipments(equipments);
-            setClasses(classes);
-            setRevenues(revenues);
-            setEnrollment(enrollment);
-            setAttendance(attendance);
-            setAllClasses(allClasses);
-            
-            console.log('Big fetch done');
+    useEffect(() => {
+        const bigFetch = async () => {
+            try {
+                const [
+                    students,
+                    shifts,
+                    instructors,
+                    activities,
+                    equipments,
+                    classes,
+                    revenues,
+                    enrollment,
+                    attendance,
+                    allClasses
+                ] = await Promise.all([
+                    getStudents(),
+                    getShifts(),
+                    getInstructors(),
+                    getActivities(),
+                    getAllEquipment(),
+                    getClasses(),
+                    activityRevenue(),
+                    studentActivity(),
+                    shiftClass(),
+                    classProps()
+                ]);
 
+                setStudents(students);
+                setShifts(shifts);
+                setInstructors(instructors);
+                setActivities(activities);
+                setEquipments(equipments);
+                setClasses(classes);
+                setRevenues(revenues);
+                setEnrollment(enrollment);
+                setAttendance(attendance);
+                setAllClasses(allClasses);
+
+
+            }
+            catch (error) {
+            }
         }
-        catch (error) {
-            console.log(error)
-        }
-    }
+        bigFetch();
+    }, []);
 
     return (
-        <ClassesContext.Provider value={{ allClasses, setAllClasses, classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments, bigFetch }}>
+        <ClassesContext.Provider value={{ allClasses, setAllClasses, classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments }}>
             {children}
         </ClassesContext.Provider>
     );

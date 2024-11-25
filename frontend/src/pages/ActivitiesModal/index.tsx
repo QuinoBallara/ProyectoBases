@@ -84,7 +84,6 @@ const ActivitiesModal: React.FC = () => {
         }
 
         if (!activityEditMode) {
-            console.log(data)
             await addActivity(data);
         } else {
             await modifyActivity(activityModalData.id, data);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { EquipmentCardContainer } from '../../components/EquipmentCardContainer'
 import Button from '../../components/Button'
-import ClassModal from '../ClassModal'
 import { useModal } from '../../contexts/modalContext'
 import { EquipmentModal } from '../EquipmentModal'
 import { getAllEquipment } from '../../api/equipment'
@@ -9,7 +8,7 @@ import { useClasses } from '../../contexts/classesContext'
 
 export const Equipment = () => {
     const { setIsEquipmentModalUp, setEquipmentEditMode, isEquipmentModalUp } = useModal();
-    const {setEquipments} = useClasses();
+    const { setEquipments } = useClasses();
 
     useEffect(() => {
         const fetchEquipment = async () => {

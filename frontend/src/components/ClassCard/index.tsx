@@ -59,7 +59,6 @@ export const ClassCard = (props: ClassProps) => {
 
   const handleDelete = async () => {
     await deleteClass(props.class_id.toString());
-    console.log('Deleted class with id: ' + props.class_id);
     setClasses(await getClasses());
   };
 

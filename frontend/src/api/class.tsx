@@ -36,7 +36,6 @@ async function getClassById(classId) {
 }
 
 async function modifyClass(classId, data) {
-    console.log(classId, data);
     const response = await fetch(`${API_URL}${API_ROUTES.classes.modify(classId)}`, {
         method: 'PUT',
         headers: {
@@ -45,6 +44,9 @@ async function modifyClass(classId, data) {
         body: JSON.stringify(data),
     });
     const result = await response.json();
+    if (result.message[0].startsWith("Error executing statement")) {
+        alert('Instructor is likely already teaching a class in the same shift');
+    }
     return result;
 }
 
