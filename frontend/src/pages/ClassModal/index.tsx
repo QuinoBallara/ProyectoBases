@@ -66,6 +66,19 @@ const ClassModal: React.FC = () => {
     closeModal();
   };
 
+  const instructorsList = instructors.map((instructor: instructor) => {
+    const fullName = `${instructor.first_name} ${instructor.last_name}`;
+    return { value: instructor.id, label: fullName };
+  })
+
+  const shiftsList = shifts.map((shift: { id: string; name: string }) => {
+    return { value: shift.id, label: shift.name };
+  })
+
+  const activitesList = activities.map((activity: { id: string; description: string }) => {
+    return { value: activity.id, label: activity.description };
+  })
+
   return (
     isClassModalUp && (
       <div className="classModalContainer">
@@ -79,6 +92,7 @@ const ClassModal: React.FC = () => {
             {!classEditMode && (<Dropdown
               label="Dictated"
               options={[
+                { value: '', label: '' },
                 { value: '1', label: 'Yes' },
                 { value: '0', label: 'No' },
               ]}
@@ -89,10 +103,7 @@ const ClassModal: React.FC = () => {
 
             <Dropdown
               label="Instructor"
-              options={instructors.map((instructor: instructor) => {
-                const fullName = `${instructor.first_name} ${instructor.last_name}`;
-                return { value: instructor.id, label: fullName };
-              })}
+              options={[{ value: '', label: '' }, ...instructorsList]}
               value={classModalData.instructor_id}
               onChange={handleChange}
               name="instructor_id"
@@ -100,9 +111,7 @@ const ClassModal: React.FC = () => {
 
             <Dropdown
               label="Shift"
-              options={shifts.map((shift: { id: string; name: string }) => {
-                return { value: shift.id, label: shift.name };
-              })}
+              options={[{ value: '', label: '' }, ...shiftsList]}
               value={classModalData.shift_id}
               onChange={handleChange}
               name="shift_id"
@@ -111,9 +120,7 @@ const ClassModal: React.FC = () => {
             {!classEditMode && (
               <Dropdown
                 label="Activity"
-                options={activities.map((activity: { id: string; description: string }) => {
-                  return { value: activity.id, label: activity.description };
-                })}
+                options={[{ value: '', label: '' }, ...activitesList]}
                 value={classModalData.activity_id}
                 onChange={handleChange}
                 name="activity_id"
