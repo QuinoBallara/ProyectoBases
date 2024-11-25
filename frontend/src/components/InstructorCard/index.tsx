@@ -22,7 +22,6 @@ export const InstructorCard = (props: instructor) => {
 
   const handleDelete = async () => {
     await deleteInstructor(props.id.toString());
-    console.log('Deleted instructor with id: ' + props.id);
     setInstructors(await getInstructors());
   };
 

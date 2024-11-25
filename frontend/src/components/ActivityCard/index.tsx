@@ -13,7 +13,6 @@ export const ActivityCard = (props: activityType) => {
 
     const handleDelete = async () => {
         await deleteActivity(props.id.toString());
-        console.log('Deleted activity with id: ' + props.id);
         setActivities(await getActivities());
     }
 

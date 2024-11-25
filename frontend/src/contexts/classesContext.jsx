@@ -39,29 +39,28 @@ export const ClassesProvider = ({ children }) => {
     const [attendance, setAttendance] = useState([]);
 
     useEffect(() => {
-       
-    const filteredClasses = allClasses.filter((classItem) => {
-        console.log('classItem', classItem);
-        const instructorName = instructors.find(
-            (inst) => inst.id.toString() === filters.instructor
-        )?.first_name;
 
-        const shiftName = shifts.find(
-            (shift) => shift.id.toString() === filters.shift
-        )?.name.toLowerCase();
+        const filteredClasses = allClasses.filter((classItem) => {
+            const instructorName = instructors.find(
+                (inst) => inst.id.toString() === filters.instructor
+            )?.first_name;
 
-        const activityName = activities.find(
-            (activity) => activity.id.toString() === filters.activity
-        )?.description.toLowerCase();
+            const shiftName = shifts.find(
+                (shift) => shift.id.toString() === filters.shift
+            )?.name.toLowerCase();
 
-        return (
-            (filters.instructor === "any" || classItem.instructor_first_name.includes(instructorName)) &&
-            (filters.shift === "any" || classItem.shift_name.toLowerCase() === shiftName) &&
-            (filters.activity === "any" || classItem.activity_description.toLowerCase() === activityName)
-        );
-    });
-    setClasses(filteredClasses);
-}, [filters, allClasses, instructors, shifts, activities]);
+            const activityName = activities.find(
+                (activity) => activity.id.toString() === filters.activity
+            )?.description.toLowerCase();
+
+            return (
+                (filters.instructor === "any" || classItem.instructor_first_name.includes(instructorName)) &&
+                (filters.shift === "any" || classItem.shift_name.toLowerCase() === shiftName) &&
+                (filters.activity === "any" || classItem.activity_description.toLowerCase() === activityName)
+            );
+        });
+        setClasses(filteredClasses);
+    }, [filters, allClasses, instructors, shifts, activities]);
 
 
     useEffect(() => {
@@ -102,11 +101,9 @@ export const ClassesProvider = ({ children }) => {
                 setAttendance(attendance);
                 setAllClasses(allClasses);
 
-                console.log('Big fetch done');
 
             }
             catch (error) {
-                console.log(error)
             }
         }
         bigFetch();

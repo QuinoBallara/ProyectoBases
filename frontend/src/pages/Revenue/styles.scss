@@ -1,37 +1,57 @@
-.table-container {
+.chart-container {
     margin: 20px auto;
-    max-width: 600px;
+    max-width: 800px;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.revenue-table {
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  .chart-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .revenue-table {
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     text-align: left;
-    color: black; 
-}
-
-.revenue-table th,
-.revenue-table td {
+    color: black;
+  }
+  
+  .revenue-table th,
+  .revenue-table td {
     padding: 12px 15px;
     border-bottom: 1px solid #ddd;
-    color: black; 
-}
-
-.revenue-table th {
+    color: black;
+  }
+  
+  .revenue-table th {
     background-color: #f4f4f4;
     font-weight: bold;
     text-transform: uppercase;
-    color: black; 
-}
-.revenue-table tr:nth-child(even) {
+    color: black;
+  }
+  
+  .revenue-table tr:nth-child(even) {
     background-color: #f9f9f9;
-}
-
-.revenue-table tr:hover {
+  }
+  
+  .revenue-table tr:hover {
     background-color: #f1f1f1;
-}
+  }
+  
+  .revenue-table td {
+    text-align: center;
+  }
+  
+  .revenue-table .revenue-column {
+    font-weight: bold;
+    color: #28a745;
+  }
+  
