@@ -1,7 +1,6 @@
 import { FC } from "react";
-
-import './styles.scss';
 import React from "react";
+import './styles.scss';
 
 interface ButtonProps {
     label: string;
@@ -13,7 +12,7 @@ interface ButtonProps {
 const Button: FC<ButtonProps> = ({
     label,
     onClick,
-    className,
+    className = '',
     type = "button",
 }) => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,7 +22,7 @@ const Button: FC<ButtonProps> = ({
     return (
         <div className="button-field">
             <button
-                className={`button ${className ? `button-${className}` : ''}`}
+                className={`button ${className}`}
                 onClick={handleClick}
                 type={type}
             >
@@ -31,6 +30,6 @@ const Button: FC<ButtonProps> = ({
             </button>
         </div>
     );
-}
+};
 
 export default Button;
