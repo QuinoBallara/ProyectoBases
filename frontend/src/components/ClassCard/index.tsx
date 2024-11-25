@@ -57,6 +57,13 @@ export const ClassCard = (props: ClassProps) => {
     return [{ value: '', label: 'Select a student' }, ...options];
   }, [students, enrolledStudents]);
 
+  const handleDelete = async () => {
+    await deleteClass(props.class_id.toString());
+    console.log('Deleted class with id: ' + props.class_id);
+    setClasses(await getClasses());
+  };
+
+
   const equipmentOptions = useMemo(() => {
     return [
       { value: '', label: 'No equipment' },
@@ -80,12 +87,11 @@ export const ClassCard = (props: ClassProps) => {
     }
   };
 
-  const handleDelete = async (): Promise<void> => {
+  const handleDeleteStudent = async (): Promise<void> => {
     if (selectedDeleteStudent !== '') {
       await deleteClassStudent(props.class_id, selectedDeleteStudent);
       await fetchEnrolledStudents();
       setSelectedDeleteStudent('');
-      setClasses(await getClasses());
     }
   };
 
@@ -130,10 +136,10 @@ export const ClassCard = (props: ClassProps) => {
             name="Delete Student"
             options={deleteStudentsOptions}
           />
-          <Button label="Delete" onClick={handleDelete} />
+          <Button label="Delete" onClick={handleDeleteStudent} />
         </div>
         <Button className="edit-button" label="Edit" onClick={handleEdit} />
-        <Button className="delete-button" label="Delete" onClick={() => console.log('Delete class')} />
+        <Button className="delete-button" label="Delete" onClick={handleDelete} />
       </div>
     </div>
   );
