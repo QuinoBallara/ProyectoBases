@@ -11,7 +11,7 @@ import { getClasses } from '../../api/class';
 
 export const Home = () => {
 
-  const { filters, setFilters, bigFetch, setAllClasses } = useClasses();
+  const { filters, setFilters, bigFetch, setAllClasses, instructors, shifts, activities } = useClasses();
 
   const { isClassModalUp, setIsClassModalUp, setClassEditMode } = useModal();
 
@@ -50,9 +50,10 @@ export const Home = () => {
             label="Instructor"
             options={[
               { value: 'any', label: 'Any' },
-              { value: '1', label: 'Instructor 1' },
-              { value: '2', label: 'Instructor 2' },
-              { value: '3', label: 'Instructor 3' },
+              ...instructors.map((instructor) => ({
+                value: instructor.id.toString(),
+                label: instructor.first_name + ' ' + instructor.last_name,
+              })),
             ]}
             value={filters.instructor}
             onChange={(e) => handleFilterChange(e, 'instructor')}
@@ -62,9 +63,10 @@ export const Home = () => {
             label="Shift"
             options={[
               { value: 'any', label: 'Any' },
-              { value: 'morning', label: 'Morning' },
-              { value: 'afternoon', label: 'Afternoon' },
-              { value: 'night', label: 'Night' },
+              ...shifts.map((shift) => ({
+                value: shift.id.toString(),
+                label: shift.name,
+              })),
             ]}
             value={filters.shift}
             onChange={(e) => handleFilterChange(e, 'shift')}
@@ -74,9 +76,10 @@ export const Home = () => {
             label="Activity"
             options={[
               { value: 'any', label: 'Any' },
-              { value: 'yoga', label: 'Yoga' },
-              { value: 'pilates', label: 'Pilates' },
-              { value: 'crossfit', label: 'Crossfit' },
+              ...activities.map((activity) => ({
+                value: activity.id.toString(),
+                label: activity.description,
+              })),
             ]}
             value={filters.activity}
             onChange={(e) => handleFilterChange(e, 'activity')}
