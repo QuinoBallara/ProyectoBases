@@ -31,7 +31,7 @@ export const TopBar = () => {
                     { path: '/students', label: 'Students' },
                     { path: '/instructors', label: 'Instructors' },
                     { path: '/equipment', label: 'Equipment' },
-                    { path: '/revenues', label: 'Revenues' },
+                    { path: '/revenues', label: 'Revenue' },
                     { path: '/enrollment', label: 'Enrollment' },
                     { path: '/attendance', label: 'Attendance' },
                 ].map((item) => (
