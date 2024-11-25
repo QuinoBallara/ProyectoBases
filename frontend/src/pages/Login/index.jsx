@@ -19,14 +19,16 @@ export const Login = () => {
             return;
         }
 
-        fetch("http://localhost:5001/logins/" + email, {
+        const route = `http://localhost:5001/logins/isRegistered?mail=` + email + `&password=` + password
+
+        fetch(route, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then(response => response.json())
             .then(data => {
-                if (data.password === password) {
+                if (data.isRegistered) {
                     setAuthData({ email: email, password: password })
                     setIsAuthenticated(true);
                     navigate("/");
