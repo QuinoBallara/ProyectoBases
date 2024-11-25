@@ -44,7 +44,13 @@ async function modifyClass(classId, data) {
         },
         body: JSON.stringify(data),
     });
-    const result = await response.json();
+
+    if (response.status === 403) {
+        alert("You don't have permission to modify this class");
+        return;
+    }
+
+    const result = response
     return result;
 }
 
