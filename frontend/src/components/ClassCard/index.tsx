@@ -42,7 +42,7 @@ export const ClassCard = (props: ClassProps) => {
         value: student.id.toString(),
         label: `${student.first_name} ${student.last_name}`,
       }));
-    return [{ value: '', label: 'Select a student' }, ...options];
+    return [{ value: '', label: '' }, ...options];
   }, [students, enrolledStudents]);
 
   const addStudentsOptions = useMemo(() => {
@@ -54,7 +54,7 @@ export const ClassCard = (props: ClassProps) => {
         label: `${student.first_name} ${student.last_name}`,
 
       }));
-    return [{ value: '', label: 'Select a student' }, ...options];
+    return [{ value: '', label: '' }, ...options];
   }, [students, enrolledStudents]);
 
   const handleDelete = async () => {
@@ -66,7 +66,7 @@ export const ClassCard = (props: ClassProps) => {
 
   const equipmentOptions = useMemo(() => {
     return [
-      { value: '', label: 'No equipment' },
+      { value: '', label: '' },
       ...equipments.map(equipment => ({
         value: equipment.id.toString(),
         label: equipment.description,
