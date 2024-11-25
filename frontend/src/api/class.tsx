@@ -44,6 +44,7 @@ async function modifyClass(classId, data) {
         body: JSON.stringify(data),
     });
 
+    if (response.status === 403) {
         alert("You don't have permission to modify this class");
         return;
     }
