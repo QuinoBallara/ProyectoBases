@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/authContext';
 
 export const TopBar = () => {
     const navigate = useNavigate();
-    const { setAuthData, setIsAuthenticated } = useAuth();
+    const { authData, isAuthenticated, setAuthData, setIsAuthenticated } = useAuth();
 
     const handleLogOut = () => {
         setAuthData({ isAuthenticated: false, token: '' });

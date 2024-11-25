@@ -5,7 +5,6 @@ import './styles.scss';
 
 const Attendance: React.FC = () => {
   const { attendance } = useClasses();
-
   const maxClasses= Math.max(...attendance.map(row => row.total_classes));
 
 

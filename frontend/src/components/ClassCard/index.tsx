@@ -12,7 +12,7 @@ import { addClassStudent, deleteClassStudent, getClassStudentsByClassId } from '
 
 export const ClassCard = (props: ClassProps) => {
   const { setIsClassModalUp, setClassModalData, setClassEditMode } = useModal();
-  const { students, equipments, setClasses, activities } = useClasses();
+  const { students, equipments, setClasses, activities, toggleSwitch, setToggleSwitch } = useClasses();
 
   const handleEdit = (): void => {
     setClassEditMode(true);
@@ -33,6 +33,7 @@ export const ClassCard = (props: ClassProps) => {
   useEffect(() => {
     fetchEnrolledStudents();
   }, [props.class_id]);
+
 
   const deleteStudentsOptions = useMemo(() => {
     const enrolledStudentIds = enrolledStudents.map(enrolled => enrolled.student_id);
@@ -60,6 +61,7 @@ export const ClassCard = (props: ClassProps) => {
   const handleDelete = async () => {
     await deleteClass(props.class_id.toString());
     setClasses(await getClasses());
+
   };
 
 
@@ -76,10 +78,15 @@ export const ClassCard = (props: ClassProps) => {
   const addStudent = async (): Promise<void> => {
     if (selectedAddStudent !== '') {
       let activity = activities.find(activity => activity.id === props.activity_id);
-      let student = students.find(student => student.id === parseInt(selectedAddStudent));
+      let student = students.find(student => student.id === selectedAddStudent);
+  
+  
 
       if (activity && student) {
         const studentAge = new Date().getFullYear() - new Date(student.birth_day).getFullYear();
+        console.log(studentAge);
+        console.log(activity.min_age);
+        console.log(activity.max_age);
         if (studentAge < activity.min_age || studentAge > activity.max_age) {
           alert(`Student does not meet the age requirements for this activity. Age should be between ${activity.min_age} and ${activity.max_age}.`);
           return;
@@ -95,6 +102,7 @@ export const ClassCard = (props: ClassProps) => {
         await fetchEnrolledStudents();
         setSelectedAddStudent('');
         setSelectedEquipment('');
+        setToggleSwitch(!toggleSwitch);
       }
     }
   };
@@ -105,6 +113,7 @@ export const ClassCard = (props: ClassProps) => {
       await fetchEnrolledStudents();
       setSelectedDeleteStudent('');
     }
+    setToggleSwitch(!toggleSwitch);
   };
 
   return (

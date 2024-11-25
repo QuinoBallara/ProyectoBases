@@ -19,8 +19,10 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(getIsAuthenticatedInitialState);
 
     useEffect(() => {
+        console.log(authData)
+        console.log(isAuthenticated)
         sessionStorage.setItem("authData", JSON.stringify(authData))
-        sessionStorage.setItem("isAuthenticated", true)
+        sessionStorage.setItem("isAuthenticated", isAuthenticated)
     }, [authData])
 
     return (

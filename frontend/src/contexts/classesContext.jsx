@@ -38,6 +38,8 @@ export const ClassesProvider = ({ children }) => {
 
     const [attendance, setAttendance] = useState([]);
 
+    const [toggleSwitch, setToggleSwitch] = useState(false);
+
     useEffect(() => {
 
         const filteredClasses = allClasses.filter((classItem) => {
@@ -62,6 +64,29 @@ export const ClassesProvider = ({ children }) => {
         setClasses(filteredClasses);
     }, [filters, allClasses, instructors, shifts, activities]);
 
+    useEffect(() => {
+        const fetchAttendance = async () => {
+            const data = await shiftClass();
+            setAttendance(data);
+        };
+        fetchAttendance();
+    }, [shifts, allClasses]);
+
+    useEffect(() => {
+        const fetchEnrollment = async () => {
+            const data = await studentActivity();
+            setEnrollment(data);
+        };
+        fetchEnrollment();
+    }, [activities, allClasses, toggleSwitch]);
+
+    useEffect(() => {
+        const fetchRevenues = async () => {
+            const data = await activityRevenue();
+            setRevenues(data);
+        };
+        fetchRevenues();
+    }, [activities, allClasses, toggleSwitch, equipments]);
 
     useEffect(() => {
         const bigFetch = async () => {
@@ -110,7 +135,7 @@ export const ClassesProvider = ({ children }) => {
     }, []);
 
     return (
-        <ClassesContext.Provider value={{ allClasses, setAllClasses, classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments }}>
+        <ClassesContext.Provider value={{ allClasses, setAllClasses, classes, setClasses, filters, setFilters, instructors, setInstructors, shifts, setShifts, students, setStudents, revenues, setRevenues, enrollment, setEnrollment, attendance, setAttendance, activities, setActivities, equipments, setEquipments, toggleSwitch, setToggleSwitch }}>
             {children}
         </ClassesContext.Provider>
     );
