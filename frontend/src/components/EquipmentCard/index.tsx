@@ -30,7 +30,7 @@ export const EquipmentCard = (props: EquipmentProps) => {
         <div className='card'>
             <div className='cardText'>
                 <h2 className='card-title'>{props.description}</h2>
-                <p><b>Activity:</b> {activity.description}</p>
+                <p><b>Activity:</b> {props.description}</p>
                 <p><b>Cost:</b> {props.cost}</p>
             </div>
 
